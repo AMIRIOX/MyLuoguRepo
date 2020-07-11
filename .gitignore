@@ -1,3 +1,12 @@
+*.exe
 a.exe
-in.exe
+*.txt
+.vs/
+.vscode/
+*.db
+*.json
+*.sqlite
+*.suo
+!in.txt
+test.cpp
 Makefile
