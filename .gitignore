@@ -1,12 +1,24 @@
-*.exe
-a.exe
-*.txt
+# editor/IDE folders
 .vs/
 .vscode/
+
+# executable files and database files(from compiler)
+*.exe
+*.pdb
+*.ipch
 *.db
+
+# data files
+*.txt
+*.in
+*.out
+
+# env files
 *.json
 *.sqlite
 *.suo
+
+# other (tests, makefile)
 !in.txt
 test.cpp
 Makefile
