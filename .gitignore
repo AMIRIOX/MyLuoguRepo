@@ -2,6 +2,9 @@
 .vs/
 .vscode/
 
+# special
+!especial.exe
+
 # executable files and database files(from compiler)
 *.exe
 *.pdb
