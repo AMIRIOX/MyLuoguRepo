@@ -10,13 +10,13 @@ int main() {
             n = i;
             break;
         } else
-            a[i] = c-'0';
+            a[i] = c - '0';
     }
     cin >> k;
     sort(a, a + n);
     // cout << n << " ";
-    
-    for(int i=0;i<n-k;i++) {
+
+    for (int i = 0; i < n - k; i++) {
         cout << a[i];
     }
     return 0;
