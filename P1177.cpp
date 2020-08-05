@@ -45,7 +45,7 @@ int main(){
     for(int i=0;i<n;i++){
         printf("%d ",a[i]);
     }
-    system("pause");
+    //  system("pause");
     return 0;
 }
 //@ $ & ^ % # *
