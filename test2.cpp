@@ -9,7 +9,7 @@ int main() {
     // cin >> n;
     int n,a,b,c;
     char last,s[20],ans[20];
-    scanf("%d\n",&n);
+    scanf("%d",&n);
     while (n--) {
         fgets(s,sizeof(s),stdin);
         if(s[0]=='a' || s[0]=='b' || s[0]=='c')
