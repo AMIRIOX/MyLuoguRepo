@@ -4,6 +4,7 @@
 #define MAXN 50100
 using namespace std;
 int fa[MAXN],t[MAXN];
+//TODO: 不使用桶排  用
 int find(int x) {
     if (x == fa[x]) return x;
     return fa[x] = find(fa[x]);
