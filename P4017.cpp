@@ -2,14 +2,15 @@
 #include <iostream>
 #include <queue>
 #include <vector>
+using namespace std;
 const int mod = 80112002;
 const int maxn = 100010;
 int ind[maxn], outd[maxn], f[maxn], ans;
 vector<int> gr[maxn];
 queue<int> q;
-using namespace std;
 int main() {
     int n, m;
+    cin >> n >> m;
     for (int i = 1; i <= m; i++) {
         int x, y;
         cin >> x >> y;
@@ -17,6 +18,7 @@ int main() {
         ind[y]++;
         gr[x].push_back(y);
     }
+    // memset(f,0,sizeof f);
     for (int i = 1; i <= n; i++) {
         if (ind[i] == 0) {
             q.push(i);
