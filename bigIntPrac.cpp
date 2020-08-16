@@ -6,13 +6,15 @@ struct bigint {
     int len, val[maxn];
     bigint(int x = 0) {
         memset(val, 0, sizeof val);
-        for (len = 1; x; len++) val[len] = x % 10, x /= 10;
+        for (len = 1; x; len++) {
+            val[len] = x % 10, x /= 10;
+        }
         len--;
     }
     int& operator[](int ind) { return val[ind]; }
     void flatten(int L) {
         len = L;
-        for (int i = 1; i <= L; i++) {
+        for (int i = 1; i <= len; i++) {
             val[i + 1] += val[i] / 10, val[i] %= 10;
         }
         while (!val[len]) len--;
@@ -27,8 +29,8 @@ struct bigint {
         return tmp;
     }
     friend bigint operator*(bigint a, int c) {
-        int tlen = a.len;
         bigint tmp;
+        int tlen = a.len;
         for (int i = 1; i <= tlen; i++) {
             tmp[i] = a[i] * c;
         }
@@ -46,8 +48,8 @@ int main() {
     /* code */
     bigint a(2000000000);
     bigint b(2000000000);
-    (a+b).print();
+    (a + b).print();
     std::cout << std::endl;
-    (a*3).print();
+    (a * 3).print();
     return 0;
 }
