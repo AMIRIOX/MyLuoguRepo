@@ -20,21 +20,21 @@ struct bigint {
         while (!val[len]) len--;
     }
     friend bigint operator+(bigint a, bigint b) {
-        bigint tmp;
         int tlen = max(a.len, b.len);
+        bigint tmp;
         for (int i = 1; i <= tlen; i++) {
             tmp[i] += a[i] + b[i];
         }
         tmp.flatten(tlen + 1);
         return tmp;
     }
-    friend bigint operator*(bigint a, int c) {
-        bigint tmp;
+    friend bigint operator*(bigint a,int c) {
         int tlen = a.len;
-        for (int i = 1; i <= tlen; i++) {
-            tmp[i] = a[i] * c;
+        bigint tmp;
+        for(int i=1;i<=tlen;i++) {
+            tmp[i] = a[i]*c;
         }
-        tmp.flatten(tlen + 11);
+        tmp.flatten(tlen+11);
         return tmp;
     }
     void print() {
@@ -43,6 +43,7 @@ struct bigint {
         }
     }
 };
+
 int main() {
     /* code */
     bigint a(2000000000);
