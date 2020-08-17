@@ -11,7 +11,7 @@ struct bigint {
         }
         len--;
     }
-    int& operator[](int ind) { return val[ind]; }
+    int& operator[](int i) { return val[i]; }
     void flatten(int L) {
         len = L;
         for (int i = 1; i <= len; i++) {
@@ -38,12 +38,11 @@ struct bigint {
         return tmp;
     }
     void print() {
-        for (int i = max(len, 1); i >= 1; i--) {
+        for(int i=max(len,1);i>=1;i--) {
             cout << val[i];
         }
     }
 };
-
 int main() {
     /* code */
     bigint a(2000000000);
