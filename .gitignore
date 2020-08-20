@@ -22,6 +22,6 @@
 *.suo
 
 # other (tests, makefile)
-!in.txt
 test.cpp
 Makefile
+CMakeLists.txt
