@@ -1,24 +1,10 @@
 #include <iostream>
 #include <cstdio>
-#include <cstring>
+#define re register
 using namespace std;
+const int maxn = 100010;
+int mov[4][2]={{1,2},{3,4},{5,6},{7,8}};
 int main() {
-    int n,a,b,c;
-    char last,s[20],ans[20];
-    scanf("%d\n",&n);
-    while( n-- ) {
-        fgets(s,sizeof s, stdin);
-        if(s[0]=='a' || s[0]=='b' || s[0]=='c') {
-            last = s[0],s[0]=' ';
-        }
-        sscanf(s,"%d %d",&a,&b);
-        switch (last)
-        {
-        case 'a':c=a+b;sprintf(ans,"%d+%d=%d",a,b,c);break; //+
-        case 'b':c=a-b;sprintf(ans,"%d-%d=%d",a,b,c);break; //-
-        case 'c':c=a*b;sprintf(ans,"%d*%d=%d",a,b,c);break; //*
-        }
-        printf("%s\n%d\n",ans,strlen(ans));
-    }
+    cout << mov[2][1];
     return 0;
 }
