@@ -1,13 +1,10 @@
 #include <iostream>
-#include <cstdio>
-#define re register
 using namespace std;
-const int maxn = 100010;
-int opt;
-int main() {
-    int a = 0;
-    cin >> opt;
-    a+=opt;
-    cout << a;
+
+int main(int argc, char const *argv[]) {
+    /* code */
+    int a[5] = {0, 1, 2, 3, 4};
+    int *p = &a[3];
+    cout << p[-1] << endl;
     return 0;
 }
