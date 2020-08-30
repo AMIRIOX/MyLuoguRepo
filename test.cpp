@@ -1,10 +1,12 @@
 #include <iostream>
+#include <cstdio>
+#define int long long
 using namespace std;
+const int maxn = 1e5+10;
 
-int main(int argc, char const *argv[]) {
-    /* code */
-    int a[5] = {0, 1, 2, 3, 4};
-    int *p = &a[3];
-    cout << p[-1] << endl;
+signed main() {
+    int i = 0;
+    cin >> i;
+    cout << "hello world with code " << i << endl;
     return 0;
 }
