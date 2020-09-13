@@ -1,11 +1,10 @@
 #include <cstdio>
 #include <iostream>
 #include <queue>
-#define int long long
+// #define int long long
 using namespace std;
-const int maxn = 1e5 + 10;
-int x = 0, y = 0;
-int n, a[maxn][maxn];
+const int maxn = 50;
+int n, a[maxn][maxn], vis[maxn * maxn][maxn * maxn];
 int mov[4][2] = {{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
 struct coord {
     int x, y;
@@ -15,22 +14,25 @@ struct coord {
         this->y = c.y;
     }
 };
-void bfs() {
+bool check(int a, int b) {
+    if (a >= 1 && a <= n && b >= 1 && b <= n) return true;
+    return false;
+}
+void bfs(int x, int y) {
     queue<coord> q;
-    bool isStart=true;
     q.push(coord(x, y));
+    vis[x][y] = 1;
     while (!q.empty()) {
         coord curd = q.front();
         q.pop();
-        if(curd.x==x && curd.y==y && !isStart){
-            
-            break;
-        }
-        isStart=false;
         for (int i = 0; i < 4; i++) {
             int ux = curd.x + mov[i][0];
             int uy = curd.y + mov[i][1];
-            if(ux==1 && uy==1) q.push(coord(ux,uy));
+            if (check(ux, uy) && a[ux][uy] != 1 && !vis[ux][uy]) {
+                a[ux][uy] = 0;
+                vis[ux][uy] = 1;
+                q.push(coord(ux, uy));
+            }
         }
     }
 }
@@ -43,12 +45,22 @@ signed main() {
     }
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= n; j++) {
-            if (a[i][j] == 1) {
-                x = i, y = j;
-                bfs();
-                break;
+            if (a[i][j] == 0) a[i][j] = 2;
+        }
+    }
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            if ((i == 1 || i == n || j == 1 || j == n) && (a[i][j] != 1)) {
+                a[i][j] = 0;
+                bfs(i, j);
             }
         }
+    }
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            cout << a[i][j] << ' ';
+        }
+        cout << endl;
     }
     return 0;
 }
