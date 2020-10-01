@@ -7,6 +7,7 @@ int main() {
     // char s[20], last, ans[20];
     // int n, a, b, c;
     // cin >> n;
+    //* for some tests.
     int n,a,b,c;
     char last,s[20],ans[20];
     scanf("%d",&n);
