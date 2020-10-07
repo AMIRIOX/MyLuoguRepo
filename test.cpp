@@ -1,17 +1,22 @@
 #include <iostream>
 #include <cstdio>
-#include <cstring>
 #define int long long
 using namespace std;
-const int maxn = 1e5+10;
+const int maxn = 1e6+1;
+int bs,a,b,c,d,e,f;
+int isa, fsx;
 signed main() {
-    int cnt = 0;
-    for(int i=1;i<=100000 ;i++) {
-        if(100000%i==0) {
-            cnt++;
-        }
-    }
-    cout << cnt;
-    return 0;
+    cin >> bs >> a >> b >> c >> d >> e >> f >> isa >> fsx;
+    int zf = a+b+c+d+e+f+bs;
+    if(isa) zf+=5;
+    if(a)zf++;
+    if(b)zf++;
+    if(c)zf++;
+    if(d)zf++;
+    if(e)zf++;
+    if(f)zf++;
 
+    if(zf>=fsx) cout <<"AKIOI";
+    else cout << "AFO";
+    return 0;
 }
