@@ -7,7 +7,7 @@ inline int read(){
     char ch = (char)getchar();
     while(ch<'0'||ch>'9'){
         if(ch=='-')
-            flg=0;
+            flg=0;  
         ch = (char)getchar();
     }
     while (ch >= '0' && ch <= '9') {
