@@ -14,9 +14,18 @@ int quickPower(int a, int n) {
         return tmp * tmp % mod;
     }
 }
+int quickpower2(int a, int n) {
+    int ans = 1;
+    while (n) {
+        if (n & 1) ans = ans * a % mod;
+        a = a * a % mod;
+        n >>= 1;
+    }
+    return ans;
+}
 signed main() {
     cin >> p >> k >> mod;
-    int ans = quickPower(p, k);
-    printf("%lld^%lld mod %d=%d", p, k, mod, ans%mod);
+    int ans = quickpower2(p, k);
+    printf("%lld^%lld mod %d=%d", p, k, mod, ans % mod);
     return 0;
 }
