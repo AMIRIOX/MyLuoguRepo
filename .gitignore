@@ -22,6 +22,7 @@
 *.suo
 
 # other (tests, makefile)
+test.*
 test.cpp
 Makefile
 CMakeLists.txt
