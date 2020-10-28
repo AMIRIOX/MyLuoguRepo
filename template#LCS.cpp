@@ -3,8 +3,9 @@
 //#define int long long
 #define INF 0x7fffffff
 using namespace std;
-const int maxn = 1e3+1;
-int a[maxn],b[maxn],ans=-INF,f[maxn/2][maxn/2];
+const int maxn = 1e5+1;
+int a[maxn],b[maxn],f[maxn/2][maxn/2];
+int ans=-INF;
 signed main() {
     int n;
     cin >> n;
