@@ -34,12 +34,15 @@ int G[maxn][maxn], n, m, dis[maxn], book[maxn];
 // // }
 
 int minfunc() {
-    int minx = INF;
+    int minx = INF, minu;
     for (int i = 1; i <= n; i++) {
         if (book[i]) continue;
-        minx = min(minx, dis[i]);
+        if (dis[i] < minx) {
+            minx = dis[i];
+            minu = i;
+        }
     }
-    return minx;
+    return minu;
 }
 int main() {
     // input
@@ -49,7 +52,6 @@ int main() {
         cin >> x >> y >> v;
         G[x][y] = v;
     }
-
     //? 设置所有能直接到达1的点的位置的dis[i]为G[1][i]
     //? 设置不能直接到打1的点的dis[i]为INF, 设置book[1]为1
     for (int i = 1; i <= n; i++) {
@@ -59,19 +61,20 @@ int main() {
         else
             dis[i] = INF;
     }
+    dis[1] = 0;
     //? 找到一个最小的dis[i], 枚举i点的每条出边(i,j),
     //? 如果dis[j]>dis[i]+G[i][j],则更新dis[j]=~
     //? 最后设book[i]为1
-    while (1) {
-        bool isok = 1;
-        for (int i = 1; i <= n; i++) {
-            if (!book[i]) isok = 0;
-        }
-        if (isok) break;
+    for (int y = 1; y < n; y++) {
+        // bool isok = 1;
+        // for (int i = 1; i <= n; i++) {
+        //     if (!book[i]) isok = 0;
+        // }
+        // if (isok) break;
         cout << "截至到这里, 一切正常!" << endl;
         int i = minfunc();
         for (int j = 1; j <= n; j++) {
-            if (G[i][j]) {
+            if (G[i][j] && i != j) {
                 if (dis[j] > dis[i] + G[i][j]) dis[j] = dis[i] + G[i][j];
             }
         }
