@@ -5,28 +5,28 @@
 using namespace std;
 const int maxn = 1e6 + 1;
 const int mod = 1e9 + 7;
-int staff[maxn], n, have[maxn], minx = INF, maxx = -INF, ans;
+int n, have[maxn], minx = INF, maxx = -INF, ans, anst;
 signed main() {
     cin >> n;
     for (int i = 1; i <= n; i++) {
-        cin >> staff[i];
-        if (staff[i] < minx) minx = staff[i];
-        if (staff[i] > maxx) maxx = staff[i];
-        have[staff[i]]++;
+        int x;
+        cin >> x;
+        if (x < minx) minx = x;
+        if (x > maxx) maxx = x;
+        have[x]++;
     }
-    for (int i = minx; i <= maxx; i++) {
-        //! i=i=(j+k)
-        for (int j = i; j >= 0; j--) {
-            if (i == j) continue;
-            if (have[i] >= 2) {
-                if ((i - j) == j && have[i - j] >= 2) {
-                    ans++;
-                    continue;
-                }
-                if (have[i - j]) ans++;
+    for (int i = 1; i <= maxx; i++) {
+        // // i=i=(j+k)
+        //* (i+j)=x1=x2, have[x]>=2
+        for (int j = i; j <= maxx; j++) {
+            if (i == j) {
+                anst++;
+                continue;
             }
+            if(have[i+j]>=2) ans++;
         }
     }
+    ans+=(anst/2);
     cout << ans % mod << endl;
     return 0;
 }
