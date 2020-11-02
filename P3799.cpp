@@ -1,35 +1,32 @@
 #include <cstdio>
-#include <algorithm>
+#include <iostream>
 #define int long long
+#define INF 9223372036854775800LL
 using namespace std;
-int sz[1000001];
-int ans = 0;
-int already[10000];
-bool isg(int a, int b, int c) {
-    //* 判断正三角形
-    if (a==b && b==c && a==c)
-        return true;
-    else
-        return false;
-}
-bool isg(int a,int b,int c,int d){
-    bool ba = isg(a+b,c,d);
-    bool bb = isg(a+c,b,d);
-    bool bc = isg(a+d,c,b);
-    if(ba || bc || bb) return true;
-    else return false;
-}
+const int maxn = 1e6 + 1;
+const int mod = 1e9 + 7;
+int staff[maxn], n, have[maxn], minx = INF, maxx = -INF, ans;
 signed main() {
-    int n;
-    scanf("%lld", &n);
-    for (int i = 0; i < n; i++) {
-        scanf("%lld", &sz[0]);
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cin >> staff[i];
+        if (staff[i] < minx) minx = staff[i];
+        if (staff[i] > maxx) maxx = staff[i];
+        have[staff[i]]++;
     }
-    sort(sz,sz+n);
-    for(int i=1;i<=sz[n-1];i++){
-        
+    for (int i = minx; i <= maxx; i++) {
+        //! i=i=(j+k)
+        for (int j = i; j >= 0; j--) {
+            if (i == j) continue;
+            if (have[i] >= 2) {
+                if ((i - j) == j && have[i - j] >= 2) {
+                    ans++;
+                    continue;
+                }
+                if (have[i - j]) ans++;
+            }
+        }
     }
-    
-    printf("%lld",ans%1000000007);
+    cout << ans % mod << endl;
     return 0;
 }

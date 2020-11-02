@@ -1,72 +1,32 @@
-#include <cstdio>
-#include <iostream>
-#define int long long
-using namespace std;
-const int maxn = 1e6 + 1;
-int a[maxn];
+// 现在我们开始
+// C++程序的大体框架: 包含头文件, 主函数.
 
-void merge(int L, int mid, int R) {
-    // 1 3 4 7 8   [L,mid]
-    // 2 3 4 5 6   [mid+1,R]
-    cout << "a merge begin..." << endl;
-    int temp[maxn];
-    int i = L;
-    int j = mid + 1;
-    int cnt = 1;
-    cout << "here " << L << ' ' << mid << ' ' << R << endl;
-    while (i <= mid && j <= R) {
-        printf("the a[%lld] is %lld, the b[%lld] is %lld\n", i, a[i], j, a[j]);
-        if (a[i] <= a[j]) {
-            cout << "cnt=" << cnt << endl;
-            temp[cnt++] = a[i++];
-        }
-        cout << "?" << endl;
-        if (a[j] < a[i]) {
-            temp[cnt++] = a[j++];
-        }
-        cout << "temp: " << endl;;
-        for(int i=1;i<cnt;i++) {
-            cout << temp[i] << ' ';
-        }
-        cout << endl;
-    }
-    while(i<=mid) {
-        temp[cnt++]=a[i++];
-    }
-    while(j<=R) {
-        temp[cnt++]=a[j++]; 
-    }
-    cnt=1;
-    int tm = L;
-    while(L<=R) {
-        a[L++]=temp[cnt++];
-    }
-    for(int i=tm;i<=R; i++) {
-        cout << i << ':' << a[i] << ' ';
-    }
-    cout << "\na merge..." << endl;
-}
+//? 头文件就是一些写好的代码文件 我们可以包含进来  用这些代码
 
-// [L,R]
-void mergeSort(signed L, signed R) {
-    if (L < R) {
-        cout << "a sort to be two part..." << endl;
-        int mid = (L+R)/2;
-        mergeSort(L, mid);
-        mergeSort(mid + 1, R);
-        merge(L, mid, R);
-    }
-}
+//* 比如我要使用标准输入输出, 那么头文件就是iostream
 
-signed main() {
-    int n;
-    cin >> n;
-    for(int i=1;i<=n;i++) {
-        cin >> a[i];
-    }
-    mergeSort(1, n);
-    for(int i=1;i<=n;i++) {
-        cout << a[i] << ' ';
-    }
-    return 0;
+//* 包含的"语句" 叫预处理指令 包含头文件需要预处理指令(C++20可以用import
+//这个我们以后说)
+//! 例如(例如的英文:example):
+#include <iostream>  // include的中文意思是包含, io就是input/output的缩写, stream是流的意思
+//上面的这个iostream是一个文件(file) 里面有别人写好(称为"实现")的输入输出 "功能"
+// 可以来看一下这个文件是什么样的qwq  
+
+//这些就是iostream的全部文件 你可能觉得少 事实上iostream也include了其他文件 (
+
+// 然后是主函数, 主函数是程序开始的地方, 也就是说从这里开始执行
+// 函数是什么呢? 不要和数学的函数联想
+// 函数(function), 由这样的结构构成:
+//! 返回类型 函数名([参数列表]) {
+    //! 具体的语句(我们以后说)
+//!}
+//! 例如:
+int main() {
+    //...
+    //* 对了, "//"是单行注释 他后面的所有这一行的内容都会被忽略, * ? !啥的符号不用管
+    // main的中文意思是主要的 这也就是我们的主函数 (标准规定主函数名字必须是main)
+    //! int表示什么呢? 还记得我们的函数结构吗?
+    // 对了 这里的int就是"返回类型"!
+    //? 什么是返回类型呢? 
+    // 函数(可选的)有一个返回值
 }
