@@ -66,7 +66,7 @@ int query(int index, int s, int t) {
     //*    S             T
     if (cur.end < s || cur.start > t) {
         // cout << cur.end << " " << s << " " << cur.start << " " << t << endl;
-        return 0;   // INF
+        return 0;  // INF
     }
     if (cur.start >= s && cur.end <= t) return cur.val;
     pushDown(index);
@@ -107,16 +107,18 @@ void update(int index, int s, int t, int inc) {
 signed main() {
     cin >> n >> m;
     for (int i = 1; i <= n; i++) {
-        cin >> bas[i];
+        scanf("%lld", &bas[i]);
     }
     build(1, 1, n);
     while (m--) {
-        cin >> opt;
+        scanf("%lld", &opt);
         if (opt == 1) {
-            cin >> x >> y >> k;
+            // cin >> x >> y >> k;
+            scanf("%lld %lld %lld", &x, &y, &k);
             update(1, x, y, k);
         } else if (opt == 2) {
-            cin >> x >> y;
+            // cin >> x >> y;
+            scanf("%lld %lld", &x, &y);
             cout << query(1, x, y) << endl;
         }
     }
