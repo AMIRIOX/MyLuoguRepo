@@ -27,8 +27,12 @@ struct node {
     int val;
     int start, end;
     int mark;
-    node() : val(0), start(0), end(0), mark(0) {}
-    node(int s, int e) : start(s), end(e) {}
+    // node() : val(0), start(0), end(0), mark(0) {}
+    // node(int s, int e) : start(s), end(e) {}
+    node(int s = 0, int e = 0) {
+        start = s, end = e;
+        val = mark = 0;
+    }
     void addMark(int v) { this->mark += v; }
     void clearMark() { this->mark = 0; }
 } tree[maxn];
@@ -52,7 +56,8 @@ void build(int index, int s, int t) {
     int mid = (s + t) >> 1;
     build(LEFT, s, mid);
     build(RIGHT, mid + 1, t);
-    cur.val = min(tree[LEFT].val, tree[RIGHT].val);
+    // cur.val = min(tree[LEFT].val, tree[RIGHT].val);
+    cur.val = tree[LEFT].val + tree[RIGHT].val;
 }
 
 int query(int index, int s, int t) {
@@ -60,12 +65,13 @@ int query(int index, int s, int t) {
     //*       cs    ce
     //*    S             T
     if (cur.end < s || cur.start > t) {
-        cout << cur.end << " " << s << " " << cur.start << " " << t << endl;
-        return INF;
+        // cout << cur.end << " " << s << " " << cur.start << " " << t << endl;
+        return 0;   // INF
     }
     if (cur.start >= s && cur.end <= t) return cur.val;
     pushDown(index);
-    return min(query(LEFT, s, t), query(RIGHT, s, t));
+    // return min(query(LEFT, s, t), query(RIGHT, s, t));
+    return query(LEFT, s, t) + query(RIGHT, s, t);
 }
 
 void updateOne(int index, int needup, int inc) {
@@ -80,7 +86,8 @@ void updateOne(int index, int needup, int inc) {
         updateOne(LEFT, needup, inc);
     else
         updateOne(RIGHT, needup, inc);
-    cur.val = min(tree[RIGHT].val, tree[LEFT].val);
+    // cur.val = min(tree[RIGHT].val, tree[LEFT].val);
+    cur.val = tree[RIGHT].val + tree[LEFT].val;
 }
 
 void update(int index, int s, int t, int inc) {
@@ -94,7 +101,8 @@ void update(int index, int s, int t, int inc) {
     pushDown(index);
     update(LEFT, s, t, inc);
     update(RIGHT, s, t, inc);
-    cur.val = min(tree[LEFT].val, tree[RIGHT].val);
+    // cur.val = min(tree[LEFT].val, tree[RIGHT].val);
+    cur.val = tree[LEFT].val + tree[RIGHT].val;
 }
 signed main() {
     cin >> n >> m;
