@@ -2,12 +2,12 @@
 #include <vector>
 #define mod 10007
 using namespace std;
-vector<int> v[mod+2];
+vector<int> v[mod + 2];
 int ans;
 void insert(int x) {
-    int meta = x%mod;
-    for(int i=0;i<v[meta].size();i++) {
-        if(v[meta][i]==x) return;
+    int meta = x % mod;
+    for (int i = 0; i < v[meta].size(); i++) {
+        if (v[meta][i] == x) return;
     }
     v[meta].push_back(x);
     ans++;
@@ -15,7 +15,7 @@ void insert(int x) {
 int main() {
     int n;
     cin >> n;
-    while(n--) {
+    while (n--) {
         int c;
         cin >> c;
         insert(c);
