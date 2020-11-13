@@ -19,11 +19,11 @@
 # env files
 *.json
 *.sqlite
+.atom-beautify.test.cpp
 *.suo
 
 # other (tests, makefile)
 test.*
-test.cpp
-Makefile
-CMakeLists.txt
+# Makefile
+# CMakeLists.txt
 rtsq.md
