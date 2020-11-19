@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdio>
+#include <cmath>
 // #define int long long
 using namespace std;
 const int maxn = 1e4+10;
@@ -21,7 +22,11 @@ signed main() {
   scanf("%d %d %d", &n,&m,&s);
   for(int i=1;i<=m;i++) {
     scanf("%d %d %d", &u,&v,&w);
-    G[u][v]=w;
+    if(G[u][v]) {
+      G[u][v]=min(G[u][v],w);
+    }else {
+      G[u][v]=w;
+    }
   }
   for(int i=1;i<=n;i++) {
     if(G[s][i]) dis[i]=G[s][i];
