@@ -5,7 +5,7 @@
 using namespace std;
 const int maxn = 100;
 const int INF = 0x7fffffff;
-int G[maxn][maxn], n, m, dis[maxn], book[maxn];
+int G[maxn][maxn], n, m, s, dis[maxn], book[maxn];
 // // void dfs(int u) {
 // //     int minx = INF;
 // //     for (int i = 1; i <= n; i++) {
@@ -46,7 +46,7 @@ int minfunc() {
 }
 int main() {
     // input
-    cin >> n >> m;
+    cin >> n >> m >> s;
     for (int i = 1; i <= m; i++) {
         int x, y, v;
         cin >> x >> y >> v;
@@ -55,13 +55,12 @@ int main() {
     //? 设置所有能直接到达1的点的位置的dis[i]为G[1][i]
     //? 设置不能直接到打1的点的dis[i]为INF, 设置book[1]为1
     for (int i = 1; i <= n; i++) {
-        if (i == 1) dis[i] = 0;
-        if (G[1][i])
-            dis[i] = G[1][i];
+        if (G[s][i])
+            dis[i] = G[s][i];
         else
             dis[i] = INF;
+        if (i == s) dis[i] = 0;
     }
-    dis[1] = 0;
     //? 找到一个最小的dis[i], 枚举i点的每条出边(i,j),
     //? 如果dis[j]>dis[i]+G[i][j],则更新dis[j]=~
     //? 最后设book[i]为1
@@ -71,7 +70,6 @@ int main() {
         //     if (!book[i]) isok = 0;
         // }
         // if (isok) break;
-        cout << "截至到这里, 一切正常!" << endl;
         int i = minfunc();
         for (int j = 1; j <= n; j++) {
             if (G[i][j] && i != j) {
@@ -84,7 +82,8 @@ int main() {
     //? 再次从剩下的边(book[i]==0)找出最小的 然后重复上述操作
     //? 直到所有边都访问完了
     for (int i = 1; i <= n; i++) {
-        cout << "The distance between 1 and " << i << " is " << dis[i] << endl;
+        // cout << "The distance between 1 and " << i << " is " << dis[i] << endl;
+        cout << dis[i] << " ";
     }
     return 0;
 }
