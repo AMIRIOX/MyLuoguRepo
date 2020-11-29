@@ -1,7 +1,7 @@
 /*
 * Segment Tree: The art of interval query and modification.
 * Author = amiriox lmy
-* Time = { 2020-11-05, 7:35 }
+* Time = { 2020-11-05-7:35; 2020-11-29-1:18}
 ? >OK struct node: 线段树节点, 表示一个区间
 ? >OK func build: 构造一棵线段树
 ? >OK func pushDown: 延迟更新懒标记
@@ -39,8 +39,8 @@ struct node {
 void pushDown(int index) {
     node& cur = tree[index];
     if (cur.mark) {
-        tree[LEFT].val += cur.mark;
-        tree[RIGHT].val += cur.mark;
+        tree[LEFT].val += cur.mark * (tree[LEFT].end-tree[LEFT].start+1);
+        tree[RIGHT].val += cur.mark * (tree[RIGHT].end-tree[RIGHT].start+1);
         tree[LEFT].addMark(cur.mark);
         tree[RIGHT].addMark(cur.mark);
         cur.clearMark();
@@ -94,7 +94,7 @@ void update(int index, int s, int t, int inc) {
     node& cur = tree[index];
     if (cur.end < s || cur.start > t) return;
     if (cur.start >= s && cur.end <= t) {
-        cur.val += inc;
+        cur.val += inc*(cur.end-cur.start+1);
         cur.addMark(inc);
         return;
     }
