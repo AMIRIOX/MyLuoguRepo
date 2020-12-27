@@ -13,6 +13,7 @@
 * `g++ 7.5.0`/`(WSL Ubuntu18.04)`/`Visual Studio Code`
 * `g++ (GCC) 10.2.0`/`Manjaro Linux, Kernel 5.8.11~16`/`Visual Studio Code+vim`
 * `g++ (GCC) 10.2.0+clang version 10.0.1`/`Manjaro Linux, Kernel 5.8.11~16`/`Atom`
+* `g++ (GCC) 10.2.0+clang version 10.0.1`/`CP Editor`
 
 在Dev C++上编译运行的皆加入了下列编译选项, 在vs中的没有加入, 在VSC中的部分加入(`Windows`)部分没加入(`WSL`或`linux`)
 
@@ -22,10 +23,10 @@
 
 ~~另外, atom对于`CRLF`/`LF`的显示很迷惑, 我明明是linux, 而且vscode显示的也是`LF`, 但atom就给我显示成`CRLF`, 所以换行可能有问题~~    
 问题已经解决, 但全部文件使用`CRLF`或`LF`, 如果遇到换行不正常问题, 请
+
 ```bash
-╭─    /disk01/codework/CppProjects/repos/editor-background    master !2 ──────────── ✔  6   20:55:29 
-╰─ pacman -Ss dos2unix
-warning: config file /etc/pacman.conf, line 20: directive 'SyncFirst' in section 'options' not recognized.
+[  9:28AM ]  [ amiriox@SgrA:~ ]
+ $ pacman -Ss dos2unix
 community/dos2unix 7.4.2-1
     Text file format converter
 ```
