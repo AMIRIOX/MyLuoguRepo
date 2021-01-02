@@ -1,15 +1,9 @@
-#include <iostream>
-#include <cstdio>
-#define int long long
-#define INF 9223372036854775800LL
+#include<bits/stdc++.h>
 using namespace std;
-const int maxn = 1e5+10;
 
-signed main() {
-    int x,y;
-    char c;
-    c=getchar();
-    // int ans = ((x>>y)&1);
-    // cout << ans;
+int main()
+{
+    for(;;);
+    for(int i=i;;);//这样就不报warning
     return 0;
 }
