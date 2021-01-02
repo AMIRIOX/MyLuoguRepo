@@ -47,10 +47,11 @@ int minfunc() {
 int main() {
     // input
     cin >> n >> m >> s;
+    // 注意, 如果有零权的边, 需要将G数组填为INF
     for (int i = 1; i <= m; i++) {
         int x, y, v;
         cin >> x >> y >> v;
-        G[x][y] = v;
+        G[x][y] = v;  //如果有重边 使用min(v, G[x][y]);
     }
     //? 设置所有能直接到达1的点的位置的dis[i]为G[1][i]
     //? 设置不能直接到打1的点的dis[i]为INF, 设置book[1]为1

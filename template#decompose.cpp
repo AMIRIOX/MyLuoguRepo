@@ -20,4 +20,5 @@ int main() {
     for(int i=1;i<=ans;i++) {
         cout << arr[i] << ' ';
     }
-    return 0; }
+    return 0;
+}
