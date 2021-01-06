@@ -1,57 +1,51 @@
 #include <iostream>
-#include <cstdio>
-#include <cmath>
-// #define int long long
 using namespace std;
-const int maxn = 1e4+10;
+const int maxn = 8e6+10;
 const int inf = 0x7fffffff;
-int G[maxn][maxn],n,m,s,dis[maxn],book[maxn];
-int u,v,w;
-int findMinx() {
-  int result=0,mintmp=inf;
-  for(int i=1;i<=n;i++) {
-    if(book[i]) continue;
-    if(dis[i] < mintmp) {
-      mintmp = dis[i];
-      result=i;
-    }
-  }
-  return result;
+int dis[maxn], book[maxn];
+int head[maxn], tot;
+struct edge{
+	int to,w,nxt;
+	edge() { nxt = -1; }
+}g[maxn];
+void addEdge(int u, int to, int w) {
+	tot++;
+	g[tot].to = to;
+	g[tot].w = w;
+	g[tot].nxt = head[u];
+	head[u] = tot;
 }
-signed main() {
-  scanf("%d %d %d", &n,&m,&s);
-  for(int i=1;i<=m;i++) {
-    scanf("%d %d %d", &u,&v,&w);
-    if(G[u][v]) {
-      G[u][v]=min(G[u][v],w);
-    }else {
-      G[u][v]=w;
-    }
-  }
-  for(int i=1;i<=n;i++) {
-    if(G[s][i]) dis[i]=G[s][i];
-    else dis[i]=inf;
-    if(i==s) {
-      dis[i]=0;
-      book[i]=1;
-    }
-  }
-  for(int y=1;y<=n-1;y++) {
-    int cur = findMinx();
-    for(int i=1;i<=n;i++) {
-      if(G[cur][i] && cur!=i) {
-        if(dis[i]>dis[cur]+G[cur][i])
-          dis[i]=dis[cur]+G[cur][i];
-      }
-    }
-    book[cur]=1;
-  }
-  for(int i=1;i<=n;i++) {
-    if(dis[i]==inf) {
-      printf("2147483647 ");
-      continue;
-    }
-    printf("%d ", dis[i]);
-  }
-  return 0;
+int n,m,s;
+int minfunc() {
+	int minu,minv=inf;
+	for(int i=1;i<=n;i++) {
+		if(book[i]) continue;
+		if(dis[i]<minv) {
+			minv = dis[i];
+			minu=i;
+		}
+	}
+	return minu;
+}
+int main() {
+	cin >> n >> m >> s;
+	for(int i=0;i<=n;i++) head[i]=-1;
+	for(int i=1;i<=m;i++) {
+		int x,y,v;
+		cin >> x >> y >> v;
+		addEdge(x, y, v);
+	}
+	for(int i=1;i<=n;i++) dis[i] = inf;
+	dis[s]=0;
+	for(int y=1;y<=n-1;y++) {
+		int u = minfunc();
+		for(int i=head[u]; ~i; i=g[i].nxt) {
+			if(dis[g[i].to]>dis[u]+g[i].w){
+				dis[g[i].to]=dis[u]+g[i].w;
+			}
+		}
+		book[u]=1;
+	}
+	for(int i=1;i<=n;i++) cout << dis[i] << " ";
+	return 0;
 }
