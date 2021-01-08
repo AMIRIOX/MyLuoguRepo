@@ -1,19 +1,22 @@
 #include <iostream>
-#define int long long
+#include <cstdio>
 using namespace std;
-const int inf = 0x7fffffff;
-int n, c, /*pre[100010], */ ans = -inf, sum;
-signed main() {
-    cin >> n;
-    for(int i=1; i<=n ;i++) {
-        cin >> c;
-        if(i==1) sum = ans = c;
-        else {
-            sum = sum>0?sum:0;
-            sum += c;
-            ans = max(sum, ans);
-        }
-    }
-    cout << ans << endl;
-    return 0;
+const int maxn = 2e5+10;
+int a[maxn],dp[maxn];
+// dp[i] = max(0,dp[i-1])+a[i];
+int main() {
+	int n;
+	scanf("%d", &n);
+	for(int i=1;i<=n;i++) {
+		scanf("%d", &a[i]);
+	}
+	for(int i=1;i<=n;i++) {
+		dp[i]=max(0, dp[i-1]) + a[i];
+	}
+	int ans = -0x7fffffff;
+	for(int i=1;i<=n;i++) {
+		ans = max(ans, dp[i]);
+	}
+	printf("%d\n", ans);
+	return 0;
 }
