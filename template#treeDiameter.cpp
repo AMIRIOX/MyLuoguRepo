@@ -1,10 +1,8 @@
-#include <iostream>
-#include <queue>
+#include <cstdio>
 #include <cstring>
+#include <queue>
 using namespace std;
 const int maxn = 10010;
-int dis[maxn];
-bool vis[maxn];
 struct edge
 {
     int to, w, nxt;
@@ -18,16 +16,15 @@ void addEdge(int u, int to, int w)
     g[tot].nxt = head[u];
     head[u] = tot;
 }
+int dis[maxn];
+bool vis[maxn];
 int bfs(int s)
 {
+    memset(dis, 0, sizeof(dis));
+    memset(vis, 0, sizeof(vis));
     queue<int> q;
-    while (!q.empty())
-        q.pop();
-
     q.push(s);
-    int maxnum = s, maxd = 0;
-    memset(dis, 0, sizeof dis);
-    memset(vis, 0, sizeof vis);
+    int maxd = 0, maxp;
     while (!q.empty())
     {
         int u = q.front();
@@ -35,18 +32,19 @@ int bfs(int s)
         vis[u] = true;
         for (int i = head[u]; ~i; i = g[i].nxt)
         {
-            if (vis[g[i].to])
+            int v = g[i].to;
+            if (vis[v])
                 continue;
-            vis[g[i].to] = true;
-            dis[g[i].to] = max(dis[g[i].to], dis[u] + g[i].w);
-            if (dis[g[i].to] > maxd)
-                maxd = dis[g[i].to], maxnum = g[i].to;
-            q.push(g[i].to);
+            vis[v] = true;
+            dis[v] = dis[u] + g[i].w;
+            if (dis[v] > maxd)
+                maxd = dis[v], maxp = v;
+            q.push(v);
         }
     }
-    return maxnum;
+    return maxp;
 }
-int main()
+int main(void)
 {
     int n, m;
     scanf("%d %d", &n, &m);
@@ -59,9 +57,7 @@ int main()
         addEdge(x, y, v);
         addEdge(y, x, v);
     }
-    printf("input ok.\n");
     int left = bfs(1);
     int right = bfs(left);
     printf("%d %d", left, right);
-    return 0;
 }
