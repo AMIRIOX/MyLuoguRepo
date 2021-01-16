@@ -20,36 +20,36 @@ signed main() {
     }
 
     //! O(n^2)
-    // d[1]=1;
-    // for(int i=2;i<=n;i++) {
-    //     // calc d[i]
-    //     // d[i]=max{ d[j]+1 | j<i, Aj<Ai }
+    d[1]=1;
+    for(int i=2;i<=n;i++) {
+        // calc d[i]
+        // d[i]=max{ d[j]+1 | j<i, Aj<Ai }
 
-    //     int maxx=-INF;
-    //     for(int j=1;j<i;j++) {
-    //         if(a[j]<a[i])
-    //             maxx=max(maxx,d[j]);
-    //             //d[i]=max(d[i],d[j]);
-    //     }
-    //     // if(d[i]>maxx) {
-    //     //     cout << i << " " << d[i] << " " << maxx<<endl;
-    //     // }
-    //     d[i]=max(d[i], maxx)+1;
-    // }
-    // for(int i=1;i<=n;i++) ans=max(ans,d[i]);
-    // cout <<  ": "<<  ans << endl;
+        int maxx=-INF;
+        for(int j=1;j<i;j++) {
+            if(a[j]<a[i])
+                maxx=max(maxx,d[j]);
+                //d[i]=max(d[i],d[j]);
+        }
+        // if(d[i]>maxx) {
+        //     cout << i << " " << d[i] << " " << maxx<<endl;
+        // }
+        d[i]=max(d[i], maxx)+1;
+    }
+    for(int i=1;i<=n;i++) if(d[i]<=INF) ans=max(ans,d[i]);
+    cout <<  ": "<<  ans << endl;
 
     //* O(nlogn)
-    d[1] = a[1];
-    int len = 1;
-    for (int i = 2; i <= n; i++) {
-        if (a[i] >= d[len])
-            d[++len] = a[i];
-        else {
-            int in = lower_bound(d + 1, d + n + 1, a[i]) - d;
-            d[in] = a[i];
-        }
-    }
-    cout << len << endl;
+    // d[1] = a[1];
+    // int len = 1;
+    // for (int i = 2; i <= n; i++) {
+    //     if (a[i] >= d[len])
+    //         d[++len] = a[i];
+    //     else {
+    //         int in = upper_bound(d + 1, d + n + 1, a[i]) - d;
+    //         d[in] = a[i];
+    //     }
+    // }
+    // cout << len << endl;
     return 0;
 }
