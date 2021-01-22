@@ -56,7 +56,6 @@ int main()
 }
 #endif
 
-
 #ifdef DIJKSTRA_METHOD
 #include <iostream>
 #include <cstdio>
@@ -161,3 +160,47 @@ int main(void)
     return 0;
 }
 #endif
+#include <iostream>
+using namespace std;
+const int maxn = 1e4 + 10;
+struct edge
+{
+    int to, w, nxt;
+} g[maxn];
+int tot, head[maxn];
+void addEdge(int u, int to, int w)
+{
+    g[++tot].to = to;
+    g[tot].w = w;
+    g[tot].nxt = head[u];
+    head[u] = tot;
+}
+struct pure
+{
+    int u, v, dis;
+} e[maxn], ans[maxn];
+int bc;
+pure del;
+
+void dfs(int u) {
+    
+}
+int main()
+{
+    int n, m;
+    scanf("%d %d", &n, &m);
+    for (int i = 1; i <= m; i++)
+    {
+        int x, y, v;
+        scanf("%d %d %d", &x, &y, &v);
+        addEdge(x, y, v);
+        addEdge(y, x, v);
+        e[++bc].u = x;
+        e[bc].v = y;
+        e[bc].dis = v;
+    }
+    for(int i=1;i<=m;i++) {
+        del=e[i];
+        dfs(del.u);
+    }
+}
