@@ -1,5 +1,8 @@
 # Welcome
 
+
+> news: 目前已更换至openSUSE Tumbleweed。
+
 菜OIer`amiriox`的[luogu](https://www.luogu.com.cn/)题目code, ~~有一些没AC掉的题~~
 我的洛谷主页: [https://www.luogu.com.cn/user/320697](https://www.luogu.com.cn/user/320697)
 
@@ -14,6 +17,7 @@
 * `g++ (GCC) 10.2.0`/`Manjaro Linux, Kernel 5.8.11~16`/`Visual Studio Code+vim`
 * `g++ (GCC) 10.2.0+clang version 10.0.1`/`Manjaro Linux, Kernel 5.8.11~16`/`Atom`
 * `g++ (GCC) 10.2.0+clang version 10.0.1`/`CP Editor`
+* `g++ (SUSE Linux) 10.2.1 20201202`/`OpenSUSE Tumbleweed 5.10.9-1-default`/`VSCode`
 
 在Dev C++上编译运行的皆加入了下列编译选项, 在vs中的没有加入, 在VSC中的部分加入(`Windows`)部分没加入(`WSL`或`linux`)
 
