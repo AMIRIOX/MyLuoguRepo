@@ -54,16 +54,16 @@ int main() {
             if (!iss[j]) {
                 // e: stopped->j
                 for (int k = 1; k <= nums; k++)
-                    // if (!built[stopped[k]][j]) {
-                    //     ind[j]++;
-                    //     add(stopped[i], j);
-                    //     built[stopped[k]][j] = 1;
-                    // }
-                    if (!built[j][stopped[k]]) {
-                        ind[stopped[k]]++;
-                        add(j, stopped[k]);
-                        built[j][stopped[k]] = 1;
+                    if (!built[stopped[k]][j]) {
+                        ind[j]++;
+                        add(stopped[k], j);
+                        built[stopped[k]][j] = 1;
                     }
+                    // if (!built[j][stopped[k]]) {
+                    //     ind[stopped[k]]++;
+                    //     add(j, stopped[k]);
+                    //     built[j][stopped[k]] = 1;
+                    // }
             }
         }
     }
