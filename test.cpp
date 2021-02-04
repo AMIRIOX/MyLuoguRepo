@@ -1,64 +1,49 @@
-#include <iostream>
-#include <cmath>
-#include <cstring>
-#define int unsigned long long
-const int maxn = 2e5 + 10;
-struct edge
+#include <cstdio>
+#include <vector>
+#include <queue>
+#define N 105
+using namespace std;
+int fa[N],rd[N],Map[N][N],path[N][N],n,m;
+int find_(int x) {return x==fa[x]?x:fa[x]=find_(fa[x]);}
+int tppx()
 {
-    int to, w, nxt;
-} g[maxn];
-int tot, head[maxn];
-void addEdge(int u, int to, int w)
-{
-    g[++tot].to = to;
-    g[tot].w = w;
-    g[tot].nxt = head[u];
-    head[u] = tot;
+    int ret=0,que[N<<4],l=0,r=0;
+    for(int i=1;i<=n;++i) if(!rd[i]) que[++r]=i;
+    for(int now;l<r;)
+    {
+        now=que[++l];
+        if(l==r)
+        {
+            int i=1;
+            for(i=1;i<=r;++i) if(path[now][que[i]]==0) break;
+            if(i==r+1) ret++;
+        }
+        for(int i=1;i<=n;++i)
+        if(Map[now][i])
+        {
+            if(rd[i])
+            {
+                rd[i]--;
+                if(!rd[i]) que[++r]=i;
+                for(int j=1;j<=r;++j) path[i][que[j]]|=path[now][que[j]];//==if(path[now][que[j]]) path[i][que[j]]=1;
+            }
+        }
+    }
+    return ret;
 }
-int n, m;
-int ans = pow(2, 63) - 1;
-int min(int a, int b) { return a > b ? b : a; }
-int vis[maxn];
-bool allvis()
+int main()
 {
-    for (int i = 1; i <= n; i++)
+    scanf("%d%d",&n,&m);
+    for(int x,y,i=1;i<=m;++i)
     {
-        if (vis[i] == 0)
-            return false;
+        scanf("%d%d",&x,&y);
+        fa[find_(y)]=find_(x);
+        rd[y]++;
+        Map[x][y]=1;
     }
-    return true;
-}
-void dfs(int par, int u, int val)
-{
-    vis[u] = true;
-    if (allvis())
-        memset(vis, 0, sizeof(vis));
-    if (u == 1 && par != -1)
-    {
-        //ans yes
-        ans = min(ans, val);
-        memset(vis, 0, sizeof(vis));
-        return;
-    }
-    for (int i = head[u]; i; i = g[i].nxt)
-    {
-        if (!vis[g[i].to])
-            dfs(u, g[i].to, val + g[i].w);
-    }
-}
-signed main()
-{
-    int n, m;
-    scanf("%lld %lld", &n, &m);
-    for (int i = 1; i <= m; i++)
-    {
-        int x, y, v;
-        scanf("%lld %lld %lld", &x, &y, &v);
-        addEdge(x, y, v);
-        addEdge(y, x, v);
-    }
-    std::cout << "input ok" << std::endl;
-    dfs(-1, 1, 0);
-    printf("%d", ans);
+    int k=0;
+    for(int i=1;i<=n;++i) {if(fa[i]==i) k++;path[i][i]=1;} 
+    if(k>1) printf("0\n");
+    else printf("%d\n",tppx());
     return 0;
 }

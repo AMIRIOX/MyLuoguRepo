@@ -24,6 +24,7 @@
 
 # other (tests, makefile)
 test.*
+test.cpp
 # Makefile
 # CMakeLists.txt
 rtsq.md
