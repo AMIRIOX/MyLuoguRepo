@@ -1,3 +1,4 @@
+#ifdef TOPOLOGICAL_SORT_METHOD
 #include <cstdio>
 #include <iostream>
 const int maxn = 4e3 + 10;
@@ -32,8 +33,8 @@ int topo() {
                     q[++r] = i;
                 for (int j = 1; j <= r; j++)
                     path[i][q[j]] |= path[u][q[j]];
-                    // if (path[u][q[j]])
-                    //     path[i][q[j]] = 1;
+                // if (path[u][q[j]])
+                //     path[i][q[j]] = 1;
             }
         }
     }
@@ -61,5 +62,38 @@ int main() {
         return 0;
     }
     printf("%d\n", topo());
+    return 0;
+}
+#endif
+
+#include <cstdio>
+using namespace std;
+const int maxn = 120;
+int ans;
+int n, m, f[maxn][maxn];
+int main() {
+    scanf("%d %d", &n, &m);
+    for (int i = 1; i <= m; i++) {
+        int x, y;
+        scanf("%d %d", &x, &y);
+        f[x][y] = 1;
+    }
+    for (int k = 1; k <= n; k++) {
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                f[i][j] = f[i][j] | (f[i][k] & f[k][j]);
+            }
+        }
+    }
+    for (int i = 1; i <= n; i++) {
+        int ok = 1;
+        for (int j = 1; j <= n; j++) {
+            if (i == j)
+                continue;
+            ok = ok & (f[i][j] | f[j][i]);
+        }
+        ans += ok;
+    }
+    printf("%d\n", ans);
     return 0;
 }
