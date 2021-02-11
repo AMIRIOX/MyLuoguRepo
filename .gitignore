@@ -23,8 +23,11 @@
 *.suo
 
 # other (tests, makefile)
-test.*
+testc.cpp
+test2.cpp
 test.cpp
+test.tex
+
 # Makefile
 # CMakeLists.txt
 rtsq.md
