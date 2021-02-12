@@ -45,11 +45,28 @@ int minv() {
 Node* merges(Node* x) {
     if (x == nullptr || x->xd == nullptr)
         return nullptr;
-    Node *a = x->xd, *b = a->xd;
-    x->xd = a->xd = nullptr;
+    Node *a = x->xd, *b = nullptr;
+    if (a != nullptr) {
+        b = a->xd;
+        x->xd = a->xd = nullptr;
+    } else {
+        x->xd = nullptr;
+    }
+    a->fa = nullptr;
     return merge(merge(x, a), merges(b));
 }
-
+Node* decreaseKey(Node* x, int val) {
+    x->v = val;
+    if (x->fa == nullptr)
+        return x;
+    if (x->fa->ch == x)
+        x->fa->ch = x->xd;
+    else
+        x->fa->xd = x->xd;
+    x->xd->fa = x->fa;
+    x->fa = x->xd = nullptr;
+    return merge(root, x);
+}
 void deleteMin() {
     root = merges(root->ch);
 }
