@@ -21,6 +21,7 @@
 *.sqlite
 .atom-beautify.test.cpp
 *.suo
+vgcore.*
 
 # other (tests, makefile)
 testc.cpp

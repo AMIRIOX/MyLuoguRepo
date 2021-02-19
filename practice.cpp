@@ -1,89 +1,48 @@
 #include <cstdio>
 #include <iostream>
+#include <random>
 using namespace std;
-const int maxn = 5e5 + 10;
-int val[maxn], ls[maxn], rs[maxn];
-int cnt[maxn], siz[maxn], sum;
-
-void print(int o) {
-    if (!o)
-        return;
-
-    print(ls[o]);
-    for (int i = 1; i <= cnt[o]; i++)
-        printf("%d ", val[o]);
-    printf("\n");
-    print(rs[o]);
+const int maxn = 10010;
+struct node {
+    int ls, rs;
+    int val, prikey;
+    int size;
+} fhq[maxn];
+int cnt, root;
+std::mt19937 rnd(233);
+int newnode(int val) {
+    fhq[++cnt].val = val;
+    fhq[cnt].prikey = rnd();
+    fhq[cnt].size = 1;
+    return cnt;
 }
-int getmin(int o) {
-    if (!ls[o])
-        return val[o];
-    return getmin(ls[o]);
+void update(int x) {
+    fhq[x].size = fhq[fhq[x].ls].size + fhq[fhq[x].rs].size;
 }
-int getmax(int o) {
-    if (!rs[o])
-        return val[o];
-    return getmax(rs[o]);
-}
-void insert(int& o, int v) {
-    if (!o) {
-        val[o = ++sum] = v;
-        siz[o] = cnt[o] = 1;
-        return;
+void split(int rt, int key, int& x, int& y) {
+    if (!rt)
+        x = y = 0;
+    if (fhq[rt].val <= key) {
+        x = rt;
+        split(fhq[rt].rs, key, fhq[rt].rs, y);
+    } else {
+        y = rt;
+        split(fhq[rt].ls, key, x, fhq[rt].ls);
     }
-    siz[o]++;
-    if (val[o] == v) {
-        cnt[o]++;
-        return;
+    update(rt);
+}
+int merge(int x, int y) {
+    if (!x || !y)
+        return x + y;
+    if (fhq[x].prikey >= fhq[y].prikey) {
+        fhq[x].rs = merge(fhq[x].rs, y);
+        update(x);
+        return x;
+    } else {
+        fhq[y].ls = merge(x, fhq[y].ls);
+        update(y);
+        return y;
     }
-    if (v > val[o])
-        insert(rs[o], v);
-    if (v < val[o])
-        insert(ls[o], v);
 }
-int delmin(int& o) {
-    if (!ls[o]) {
-        int u = o;
-        o = rs[o];
-        return u;
-    }
-    int u = delmin(ls[o]);
-    siz[o] -= cnt[u];
-    return u;
-}
-
-void del(int& o, int v) {
-    siz[o]--;
-    if (val[o] == v) {
-        if (cnt[o] > 1) {
-            cnt[o]--;
-            return;
-        } else {
-            if (ls[o] && rs[o])
-                o = delmin(rs[o]);
-            else
-                o = ls[o] | rs[o];
-            return;
-        }
-    }
-    if (v > val[o])
-        del(rs[o], v);
-    if (v < val[o])
-        del(ls[o], v);
-}
-
-int rnk(int o, int v) {
-    if (val[o] == v)
-        return siz[ls[o]] + 1;
-    if (v < val[o])
-        return rnk(ls[o], v);
-    if (v > val[o])
-        return rnk(rs[o], v) + cnt[o] + siz[ls[o]];
-}
-int kth(int o, int k) {
-    if (siz[ls[o]] >= k)
-        return kth(ls[o], k);
-    if (siz[ls[o]] < k - cnt[o])
-        return kth(rs[o], k - cnt[o] - siz[ls[o]]);
-    return val[o];
-}
+// insert, delete, rank, kth, bef, nxt
+// insert()
