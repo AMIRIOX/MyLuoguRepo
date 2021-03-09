@@ -1,35 +1,37 @@
 #include <cstdio>
 #include <iostream>
-#define int long long
 using namespace std;
+typedef long long LL;
 const int maxn = 1e3 + 10;
-int n, m, a[maxn][maxn], vis[maxn][maxn];
-int mov[3][2] = {{-1, 0}, {1, 0}, {0, 1}};
-int ans = -0x7fffffff;
-// int mem[maxn][maxn];
-void dfs(int x, int y, int cur) {
-    if (x == n && y == m) {
-        ans = max(ans, cur + a[x][y]);
-        return;
+const LL mins = -1e18;
+int n, m;
+LL a[maxn][maxn];
+LL mem[maxn][maxn][2];
+LL dfs(int x, int y, int from) {
+    if (x < 1 || x > n || y < 1 || y > m)
+        return mins;
+    if (mem[x][y][from] != mins)
+        return mem[x][y][from];
+    if (from == 0) {
+        mem[x][y][from] =
+            max(max(dfs(x + 1, y, 0), dfs(x, y - 1, 0)), dfs(x, y - 1, 1)) +
+            a[x][y];
     } else {
-        for (int i = 0; i < 3; i++) {
-            int nx = x + mov[i][0], ny = y + mov[i][1];
-            if (nx < 1 || nx > n || ny < 1 || ny > m || vis[nx][ny])
-                continue;
-            vis[nx][ny] = 1;
-            dfs(nx, ny, cur + a[x][y]);
-            vis[nx][ny] = 0;
-        }
+        mem[x][y][from] =
+            max(max(dfs(x - 1, y, 1), dfs(x, y - 1, 0)), dfs(x, y - 1, 1)) +
+            a[x][y];
     }
+    return mem[x][y][from];
 }
-signed main() {
-    scanf("%lld %lld", &n, &m);
+int main(void) {
+    scanf("%d %d", &n, &m);
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= m; j++) {
             scanf("%lld", &a[i][j]);
+            mem[i][j][0] = mem[i][j][1] = mins;
         }
     }
-    dfs(1, 1, 0);
-    printf("%lld\n", ans);
+    mem[1][1][0] = mem[1][1][1] = a[1][1];
+    printf("%lld\n", dfs(n, m, 1));
     return 0;
 }
