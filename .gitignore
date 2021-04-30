@@ -1,6 +1,7 @@
 # editor/IDE folders
 .vs/
 .vscode/
+luoguorg.sublime-workspace
 
 # special
 !especial.exe

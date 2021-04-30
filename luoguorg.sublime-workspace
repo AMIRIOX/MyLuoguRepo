@@ -7,14 +7,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "P6785.cpp",
-			"settings":
-			{
-				"buffer_size": 1020,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -28,20 +20,44 @@
 		"selected_items":
 		[
 			[
-				"ui theme",
-				"Terminus Utilities: Select Theme"
+				"theme",
+				"UI: Select Color Scheme"
+			],
+			[
+				"pcip",
+				"Package Control: Install Package"
+			],
+			[
+				"terminal",
+				"Terminal: Open"
+			],
+			[
+				"PCIP",
+				"Package Control: Install Package"
+			],
+			[
+				"format",
+				"CoolFormat: Quick Format"
+			],
+			[
+				"collfor",
+				"CoolFormat: Selected Format"
+			],
+			[
+				"menu",
+				"View: Toggle Menu"
 			],
 			[
 				"install",
 				"Package Control: Install Package"
 			],
 			[
-				"package settings",
-				"Preferences: Package Control Settings"
+				"ui theme",
+				"Terminus Utilities: Select Theme"
 			],
 			[
-				"theme",
-				"UI: Select Color Scheme"
+				"package settings",
+				"Preferences: Package Control Settings"
 			]
 		],
 		"width": 0.0
@@ -51,6 +67,8 @@
 		"height": 235.0,
 		"history":
 		[
+			"help",
+			"HELP"
 		]
 	},
 	"distraction_free":
@@ -68,15 +86,21 @@
 	],
 	"file_history":
 	[
+		"/main/codework/CppProjects/luogu.org/src/luoguorg.sublime-project",
+		"/main/codework/CppProjects/luogu.org/src/.atom-beautify.test.cpp",
+		"/main/codework/CppProjects/luogu.org/src/RE-P5732.cpp",
+		"/main/codework/CppProjects/luogu.org/src/RE-P5731.cpp",
+		"/main/codework/CppProjects/luogu.org/src/P1111.cpp",
+		"/home/amiriox/.config/sublime-text-3/Packages/CoolFormat/CoolFormatLib/CoolFormatConfig.cfconfig",
+		"/main/codework/CppProjects/luogu.org/src/P6785.cpp",
 		"/main/codework/CppProjects/luogu.org/src/P6850.cpp",
 		"/main/codework/CppProjects/luogu.org/src/P6832.cpp",
 		"/main/codework/CppProjects/luogu.org/src/P1060.cpp",
-		"/main/codework/CppProjects/luogu.org/src/luoguorg.sublime-project",
 		"/main/codework/CppProjects/luogu.org/src/a.out"
 	],
 	"find":
 	{
-		"height": 38.0
+		"height": 51.0
 	},
 	"find_in_files":
 	{
@@ -101,7 +125,7 @@
 		"replace_history":
 		[
 		],
-		"reverse": false,
+		"reverse": true,
 		"show_context": true,
 		"use_buffer2": true,
 		"whole_word": false,
@@ -110,45 +134,14 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "P6785.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1020,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								733,
-								733
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 38.0
+		"height": 51.0
 	},
 	"input":
 	{
@@ -227,7 +220,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 247.0,
+	"side_bar_width": 254.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
