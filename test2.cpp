@@ -1,27 +1,27 @@
-#include <algorithm>
 #include <cstdio>
-#include <cstring>
 #include <iostream>
 using namespace std;
+// 第一天+1 接下来两天+2 接下来三天+3
+// 1*1 + 2*2 + 3*3 +
+// n天时tot=？
+int n, cur = 1, tot = 0;
 int main() {
-    // char s[20], last, ans[20];
-    // int n, a, b, c;
-    // cin >> n;
-    //* for some tests.
-    int n,a,b,c;
-    char last,s[20],ans[20];
-    scanf("%d",&n);
-    while (n--) {
-        fgets(s,sizeof(s),stdin);
-        if(s[0]=='a' || s[0]=='b' || s[0]=='c')
-            last = s[0],s[0] = ' ';
-        sscanf(s," %d %d",&a,&b);
-        switch(last){
-            case('a'):c=a+b;sprintf(ans,"%d+%d=%d",a,b,c);break;
-            case('b'):c=a-b;sprintf(ans,"%d-%d=%d",a,b,c);break;
-            case('c'):c=a*b;sprintf(ans,"%d*%d=%d",a,b,c);break;
-        }
-        printf("%s\n%d\n",ans,int(strlen(ans)));
+    scanf("%d", &n);
+    while (n >= cur) {
+        tot += (cur * cur);
+        n -= cur;
+        cur++;
     }
+    if (n != 0)
+        tot += cur * n;
+    printf("%d\n", tot);
     return 0;
 }
+
+// n=1 | 1
+// n=2 | 1+2
+// n=3 | 1+2+2
+// n=4 | 1+2+2+3
+// n=5 | 1+2+2+3+3
+// n=6 | 1+2+2+3+3+3
+// n=7 | 1+2+2+3+3+3+4
