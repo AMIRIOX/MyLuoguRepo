@@ -1,27 +1,36 @@
-#include <cstdio>
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-// 第一天+1 接下来两天+2 接下来三天+3
-// 1*1 + 2*2 + 3*3 +
-// n天时tot=？
-int n, cur = 1, tot = 0;
+
+int n, m;
+
+struct person {
+    /* data */
+    int ind;
+    string zy;
+} per[100001];
+
 int main() {
-    scanf("%d", &n);
-    while (n >= cur) {
-        tot += (cur * cur);
-        n -= cur;
-        cur++;
+    scanf("%d %d", &n, &m);
+    int cur = 0;
+    for (int i = 0; i < n; i++) {
+        cin >> per[i].ind >> per[i].zy;
     }
-    if (n != 0)
-        tot += cur * n;
-    printf("%d\n", tot);
+    for (int i = 0; i < m; i++) {
+        int fx, step;
+        scanf("%d %d", &fx, &step);
+        if (fx == 0) {
+            int flag = ((per[cur].ind == 0) ? -1 : 1);
+            cur += (flag * step);
+            if (cur < 0) cur += n;
+            if (cur >= n) cur -= n;
+        } else if (fx == 1) {
+            int flag = ((per[cur].ind == 0) ? -1 : 1);
+            cur -= flag * step;
+            if (cur >= n) cur -= n;
+            if (cur < 0) cur += n;
+        }
+        puts(per[cur].zy.c_str());
+    }
+    puts(per[cur].zy.c_str());
     return 0;
 }
-
-// n=1 | 1
-// n=2 | 1+2
-// n=3 | 1+2+2
-// n=4 | 1+2+2+3
-// n=5 | 1+2+2+3+3
-// n=6 | 1+2+2+3+3+3
-// n=7 | 1+2+2+3+3+3+4
