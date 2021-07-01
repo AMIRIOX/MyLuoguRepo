@@ -65,7 +65,8 @@
 //     }
 //     return 0;
 // }
-#include <cmath>
+
+/*#include <cmath>
 #include <cstdio>
 #include <cstring>
 #include <iostream>
@@ -126,6 +127,48 @@ signed main() {
         }
         printf("\n");
         cnt++;
+    }
+    return 0;
+}*/
+
+#include <cmath>
+#include <cstdio>
+#include <iostream>
+using namespace std;
+char mp[5000][5000];
+void drawSingle(int x, int y) {
+    mp[x][y] = '/';
+    mp[x + 1][y] = '\\';
+    mp[x - 1][y + 1] = '/';
+    mp[x][y + 1] = '_';
+    mp[x + 1][y + 1] = '_';
+    mp[x + 2][y + 1] = '\\';
+}
+void divide(int level, int x, int y) {
+    if (level == 1) {
+        drawSingle(x, y);
+        return;
+    }
+    divide(level - 1, x, y);
+    divide(level - 1, x - pow(2, level - 1), y + pow(2, level - 1));
+    divide(level - 1, x + pow(2, level - 1), y + pow(2, level - 1));
+}
+signed main() {
+    int n;
+    scanf("%d", &n);
+    int m = pow(2, n - 1) * 4 / 2;
+    int q = pow(2, n - 1) * 2;
+
+    divide(n, m, 1);
+
+    for (int i = 1; i <= q; i++) {
+        for (int j = 1; j <= m * 2; j++) {
+            if (mp[j][i] != '/' && mp[j][i] != '\\' && mp[j][i] != '_')
+                printf(" ");
+            else
+                printf("%c", mp[j][i]);
+        }
+        printf("\n");
     }
     return 0;
 }
