@@ -1,36 +1,56 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
+string words[30];
+// void makeEdge(int a, int b) {
+//     for (int i = words[a].length() - 1; i >= 0; i--) {
+//         if (words[a][i] == words[b][0]) {
+//             int pt = 0;
+//             for (int j = i; j < words[a].length(); j++) {
+//                 if (pt >= words[b].length() || words[a][j] != words[b][pt++])
+//                     goto BRK;
+//             }
+//             if (/*(words[a] == words[b] && pt != words[a].length()) ||
+//                 (words[a].find(words[b]) == string::npos &&
+//                  words[b].find(words[a]) == string::npos)*/
+//                 (words[a] == words[b] && pt != words[a].length()) ||
+//                 (words[a].find(words[b]) == string::npos &&
+//                  words[b].find(words[a]) == string::npos)) {
+//                 cout << words[a] << " link to " << words[b]
+//                      << ", val= " << words[b].length() - pt << endl;
+//                 return;
+//             }
+//         }
+//     BRK:
+//         continue;
+//     }
+// }
 
-int n, m;
+void makeEdge(int a, int b) {
+    for (int i = words[a].length() - 1; i >= 0; i--) {
+        if (words[a][i] == words[b][0]) {
+            int pt = 0;
+            for (int j = i; j < words[a].length(); j++) {
+                if (pt >= words[b].length() || words[a][j] != words[b][pt++])
+                    goto BRK;
+            }
+            if ((words[a] == words[b] && pt != words[a].length()) ||
+                (words[a].find(words[b]) == string::npos &&
+                 words[b].find(words[a]) == string::npos)) {
+                if (words[a] == words[b] && words[b] == string("tact"))
+                    printf("???\n");
 
-struct person {
-    /* data */
-    int ind;
-    string zy;
-} per[100001];
-
-int main() {
-    scanf("%d %d", &n, &m);
-    int cur = 0;
-    for (int i = 0; i < n; i++) {
-        cin >> per[i].ind >> per[i].zy;
-    }
-    for (int i = 0; i < m; i++) {
-        int fx, step;
-        scanf("%d %d", &fx, &step);
-        if (fx == 0) {
-            int flag = ((per[cur].ind == 0) ? -1 : 1);
-            cur += (flag * step);
-            if (cur < 0) cur += n;
-            if (cur >= n) cur -= n;
-        } else if (fx == 1) {
-            int flag = ((per[cur].ind == 0) ? -1 : 1);
-            cur -= flag * step;
-            if (cur >= n) cur -= n;
-            if (cur < 0) cur += n;
+                cout << words[a] << " link to " << words[b]
+                     << ", val= " << words[b].length() - pt << endl;
+                // addEdge(a, b, words[b].length() - pt);
+                return;
+            }
         }
-        puts(per[cur].zy.c_str());
+    BRK:
+        continue;
     }
-    puts(per[cur].zy.c_str());
-    return 0;
+}
+signed main() {
+    words[1] = "tact";
+    // words[2] = "tact";
+    makeEdge(1, 1);
 }
