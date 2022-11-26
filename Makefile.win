@@ -1,0 +1,31 @@
+# Project: luogu.org
+# Makefile created by Dev-C++ 6.0u
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = test2.o test.o
+LINKOBJ  = test2.o test.o
+LIBS     = -L"D:/Apps/DevCpp/MinGW64/lib" -L"D:/Apps/DevCpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
+INCS     = -I"D:/Apps/DevCpp/MinGW64/include" -I"D:/Apps/DevCpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/Apps/DevCpp/MinGW64/lib/gcc/x86_64-w64-mingw32/9.2.0/include"
+CXXINCS  = -I"D:/Apps/DevCpp/MinGW64/include" -I"D:/Apps/DevCpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/Apps/DevCpp/MinGW64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"D:/Apps/DevCpp/MinGW64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++"
+BIN      = luogu.org.exe
+CXXFLAGS = $(CXXINCS) -Wall -Werror -Wextra -pedantic -Wimplicit-fallthrough -Wsequence-point -Wswitch-default -Wswitch-unreachable -Wswitch-enum -Wstringop-truncation -Wbool-compare -Wtautological-compare -Wfloat-equal -Wshadow=global -Wpointer-arith -Wpointer-compare -Wcast-align -Wcast-qual -Wwrite-strings -Wdangling-else -Wlogical-op -Wconversion -Wno-pedantic-ms-format
+CFLAGS   = $(INCS) -Wall -Werror -Wextra -pedantic -Wimplicit-fallthrough -Wsequence-point -Wswitch-default -Wswitch-unreachable -Wswitch-enum -Wstringop-truncation -Wbool-compare -Wtautological-compare -Wfloat-equal -Wshadow=global -Wpointer-arith -Wpointer-compare -Wcast-align -Wcast-qual -Wwrite-strings -Wdangling-else -Wlogical-op -Wconversion -Wno-pedantic-ms-format
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+test2.o: test2.cpp
+	$(CPP) -c test2.cpp -o test2.o $(CXXFLAGS)
+
+test.o: test.cpp
+	$(CPP) -c test.cpp -o test.o $(CXXFLAGS)

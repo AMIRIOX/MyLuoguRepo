@@ -15,7 +15,7 @@ int logs[maxn];
 void logo() {
     logs[1] = 0;
     logs[2] = 1;
-    for (int i = 3; i <= maxn; i++) {
+    for (int i = 3; i < maxn; i++) {
         logs[i] = logs[i / 2] + 1;
     }
 }

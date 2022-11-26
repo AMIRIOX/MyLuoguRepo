@@ -32,6 +32,7 @@ signed main() {
         q.pop();
         path[u.id] = u.parent;
         for (int i = 0; i < 4; i++) {
+            // 大概是有问题罢。 再说。
             int vx = u.x + mov[i][0];
             int vy = u.y + mov[i][1];
             if (a[vx][vy] == 0 || vx < 1 || vx > n || vy < 1 || vy > n ||
