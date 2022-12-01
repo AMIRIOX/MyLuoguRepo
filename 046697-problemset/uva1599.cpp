@@ -1,3 +1,7 @@
+// 妈的。感觉不如重写一遍了。
+// 1. 面对节点带信息或者别的带信息，千万别忘了最朴素的数组当哈希映射的方法啊 color[node]
+// 2. 写双线处理（既要执行最短路又要处理别的信息）的时候最好把队列东西取出来单独处理拓展
+// 3. memset要放在初始化前面...
 #include <iostream>
 #include <cstdio>
 #include <vector>
@@ -38,14 +42,20 @@ signed main() {
 	while(!q.empty()) q.pop();
 	q.push(1); 
 	while(!q.empty()) {
+		while(!q.empty()) {
+			vs.push_back(q.front());
+			q.pop();
+		}
 		int cur=q.front(); q.pop();
 		int minss=0x3f3f3f3f;
 		// 题解3在这里直接把q里面的元素转移到v里面 直接用v
 		// 因为后面需要两次遍历 第一次查看符合字典序要求的点 第二次拓展节点
 		// 如下我不这样做的下场就是，非最小字典序的最短路和最小字典序的最短路
 		// 混在一起被push进path中。懂了，寄，先睡觉了。
-		for(auto i=g[cur].begin(); i!=g[cur].end(); i++) {
-			int fn=(*i).first;  
+		// for(auto i=g[cur].begin(); i!=g[cur].end(); i++) {
+		for(int i=0; i<vs.size(); i++) {
+			// int fn=(*i).first;  
+			int fn=vs[i];
 			// cout << "(" << d[cur] << ")" << endl;
 			// cout << (*i).first << " " << d[fn] << ";" << endl;
 			if(d[fn]==d[cur]-1) {
@@ -57,8 +67,10 @@ signed main() {
 		// cout << "minss=" << minss << ": " << cur << endl;
 
 		// 扩展结点 
-		for(auto i=g[cur].begin(); i!=g[cur].end(); i++) {
-			int fn=(*i).first;  
+		// for(auto i=g[cur].begin(); i!=g[cur].end(); i++) {
+		for(int i=0; i<vs.size(); i++) {
+			// int fn=(*i).first;  
+			int fn=vs[i];
 			if(d[fn]==d[cur]-1 && (*i).second==minss && !vis[fn]) {
 				q.push((*i).first);
 				if(cur==1 && fn==3) cout << testcnt++ <<endl;
