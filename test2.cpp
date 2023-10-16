@@ -1,56 +1,31 @@
-#include <iostream>
+#include<bits/stdc++.h>
+#define int long long
 using namespace std;
-string words[30];
-// void makeEdge(int a, int b) {
-//     for (int i = words[a].length() - 1; i >= 0; i--) {
-//         if (words[a][i] == words[b][0]) {
-//             int pt = 0;
-//             for (int j = i; j < words[a].length(); j++) {
-//                 if (pt >= words[b].length() || words[a][j] != words[b][pt++])
-//                     goto BRK;
-//             }
-//             if (/*(words[a] == words[b] && pt != words[a].length()) ||
-//                 (words[a].find(words[b]) == string::npos &&
-//                  words[b].find(words[a]) == string::npos)*/
-//                 (words[a] == words[b] && pt != words[a].length()) ||
-//                 (words[a].find(words[b]) == string::npos &&
-//                  words[b].find(words[a]) == string::npos)) {
-//                 cout << words[a] << " link to " << words[b]
-//                      << ", val= " << words[b].length() - pt << endl;
-//                 return;
-//             }
-//         }
-//     BRK:
-//         continue;
-//     }
-// }
-
-void makeEdge(int a, int b) {
-    for (int i = words[a].length() - 1; i >= 0; i--) {
-        if (words[a][i] == words[b][0]) {
-            int pt = 0;
-            for (int j = i; j < words[a].length(); j++) {
-                if (pt >= words[b].length() || words[a][j] != words[b][pt++])
-                    goto BRK;
-            }
-            if ((words[a] == words[b] && pt != words[a].length()) ||
-                (words[a].find(words[b]) == string::npos &&
-                 words[b].find(words[a]) == string::npos)) {
-                if (words[a] == words[b] && words[b] == string("tact"))
-                    printf("???\n");
-
-                cout << words[a] << " link to " << words[b]
-                     << ", val= " << words[b].length() - pt << endl;
-                // addEdge(a, b, words[b].length() - pt);
-                return;
-            }
+signed main()
+{
+    int n; 
+    cin >> n;
+    int res = 0x3f3f3f3f, x, y;
+    for(int i = 1; i <= 13; i++)
+    {
+        if(i==2)continue;
+        int t = 1;
+        for(int j = 1; j <= i; j++)
+            t *= j;
+        t--;
+        int k;
+        if(t==0) k = 1;
+        else  k = n/t;
+        if(k != 2) 
+        {
+            int aa = abs(t * k - n);
+            if(aa < res)  res = aa, x = i, y = k;
         }
-    BRK:
-        continue;
+        if(k != 1) 
+        {
+            int aa = abs(t * (k+1) - n);
+            if(aa < res)  res = aa, x = i, y = k+1;
+        }
     }
-}
-signed main() {
-    words[1] = "tact";
-    // words[2] = "tact";
-    makeEdge(1, 1);
+    cout << x <<  " " << y << endl;
 }

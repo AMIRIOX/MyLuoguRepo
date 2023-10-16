@@ -18,8 +18,9 @@ int binaryAnswer(int x, int y) {
 
 // For malevolent, nasty and extremely villaiinous bitch precision related problems
 int maxc=50; // Specific problem specific analysis, at most how many times dichotomy
-double malevolentNastyExtremelyVillaiinousBitchBinaryAnswer() {
-	for(int cnt=1; cnt<=maxc; i++) {
+double malevolentNastyExtremelyVillaiinousBitchBinaryAnswer(int x, int y) {
+	int l=x, r=y;
+	for(int cnt=1; cnt<=maxc; cnt++) {
 		double mid=l+(r-l)/2.0;
 		if(check(mid)) l=mid; 
 		else r=mid;
