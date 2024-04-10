@@ -66,12 +66,88 @@ void ins(int k) {
         }
     }
 }
-void del() {}
-int pre() {}
-int nxt() {}
-int kth() {}
-int rk() {}
+int pre() {
+    // 小于x的节点里最大的，这里x是rt
+    int cur = ch[rt][0];
+    if(!cur) return cur;
+    while(ch[cur][1]) cur = ch[cur][1];
+    splay(cur);
+    return cur;
+}
+int nxt() {
+    int cur = ch[rt][1];
+    if(!cur) return cur;
+    while(ch[cur][0]) cur = ch[cur][0];
+    splay(cur);
+    return cur;
+}
+int kth(int k) {
+    // 查询排名为k的数，返回类型为val
+    // 要检查的是sz
+    int cur = rt;
+    while(1) {
+        if(ch[cur][0] && k <= sz[ch[cur][0]]) {
+            cur = ch[cur][0];
+        }else {
+            k -= cnt[cur] + sz[ch[cur][0]];
+            if(k <= 0) {
+              splay(cur);
+              return val[cur];
+            }
+            cur = ch[cur][1];
+        }
+    }
+}
+int rk(int k) {
+    // 查询k这个val的排名，返回类型为排名res
+    int cur = rt, res = 0;
+    while(1) {
+        if(k < val[cur]){
+            cur = ch[cur][0];
+        }else {
+            res += sz[ch[cur][0]];
+            if(val[cur] == k) {
+                splay(cur);
+                return res + 1;
+            }
+            res += cnt[cur];
+            cur = ch[cur][1];
+        }
+    }
+}
 
+void del(int k) {
+    rk(k);   // Splay rotate k(x) to root
+    if(cnt[rt] > 1) {
+        cnt[rt]--;
+        maintain(rt);
+        return;
+    }
+    if(!ch[rt][0] && !ch[rt][1]) {
+        clear(rt);
+        rt=0;
+        return; 
+    }
+    if(!ch[rt][0]) {
+        int cur = rt;
+        rt = ch[rt][1];
+        fa[rt] = 0;
+        clear(cur);
+        return;
+    }
+    if(!ch[rt][1]) {
+        int cur = rt;
+        rt = ch[rt][0];
+        fa[rt] = 0;
+        clear(cur);
+        return;
+    }
+    int cur = rt, x = pre();  // rt左子树最大值x，准备合并
+    fa[ch[cur][1]] = x;
+    ch[x][1] = ch[cur][1];
+    clear(cur);
+    maintain(rt);
+}
 
 signed main() {
 
