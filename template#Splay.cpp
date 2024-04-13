@@ -8,23 +8,23 @@ const int maxn = 1e5+10;
 // insert(), delete(), kth(), rk(), pre(), nxt()
 
 int rt, tot;
-int ch[maxn][2], fa[maxn], val[maxn], cnt[maxn], sz[i]; 
+int ch[maxn][2], fa[maxn], val[maxn], cnt[maxn], sz[maxn]; 
 
-int get(int x){ return val[x]==ch[x][1]; }
+int get(int x){ return x == ch[fa[x]][1]; } // remember not "val[x]"
 void maintain(int x) { sz[x] = cnt[x] + sz[ch[x][0]] + sz[ch[x][1]]; }
 void clear(int x) { val[x] = cnt[x] = sz[x] = ch[x][0] = ch[x][1] = fa[x] = 0; }
 
 // rotate
 void rotate(int x) {
-    int y=fa[x], z=fa[y], chk=get(x);
+    int y = fa[x], z = fa[y], chk = get(x);
     ch[y][chk] = ch[x][chk ^ 1];
-    if(ch[x][chk ^ 1]) fa[ch[x][chk^1]] = y;
+    if(ch[x][chk ^ 1]) fa[ch[x][chk ^ 1]] = y;
     ch[x][chk ^ 1] = y;
     fa[y] = x;
     fa[x] = z;
-    if(z) ch[z][y==ch[z][1]] = x;
+    if(z) ch[z][y == ch[z][1]] = x;
     maintain(y); maintain(x);
-    return 0; 
+    return; 
 }
 
 // Splay
@@ -52,8 +52,8 @@ void ins(int k) {
             splay(cur);
             break;
         }
-        f = fa[cur];
-        cur=ch[cur][k>val[cur]];
+        f = cur;  // not fa[cur]. (cur -> ch[cur..] <=> f(cur)->fa[cur]
+        cur = ch[cur][k>val[cur]];
         if(!cur) {
             val[++tot] = k;
             cnt[tot]++;
@@ -106,8 +106,8 @@ int rk(int k) {
             cur = ch[cur][0];
         }else {
             res += sz[ch[cur][0]];
-            if(val[cur] == k) {
-                splay(cur);
+            if(val[cur] == k || !cur) {
+                if(cur) splay(cur);
                 return res + 1;
             }
             res += cnt[cur];
@@ -125,7 +125,7 @@ void del(int k) {
     }
     if(!ch[rt][0] && !ch[rt][1]) {
         clear(rt);
-        rt=0;
+        rt = 0;
         return; 
     }
     if(!ch[rt][0]) {
@@ -148,9 +148,26 @@ void del(int k) {
     clear(cur);
     maintain(rt);
 }
-
+int n, opt, x;
+inline void dbg(int x) { cout << x << endl; }
 signed main() {
-
+    scanf("%d", &n);
+    while(n--) {
+        scanf("%d %d", &opt, &x);
+        if(opt == 1) {
+            ins(x);
+        }else if(opt == 2) {
+            del(x);
+        }else if(opt == 3) {
+            cout << rk(x) << endl;
+        }else if(opt == 4) {
+            cout << kth(x) << endl;
+        }else if(opt == 5) {
+            ins(x); cout << val[pre()] << endl; del(x);
+        }else if(opt == 6) {
+            ins(x); cout << val[nxt()] << endl; del(x);
+        }
+    }
     return 0;
 }
 
