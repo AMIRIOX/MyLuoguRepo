@@ -1,0 +1,44 @@
+// [l, NaN) or (NaN, r]: easy to construct
+// l, x, r: 4 conditions to construct
+// l, x1, x2, ..., x2n, r: 
+    // def f(x)=2*floor(x/2). 
+    // x+y=2n; x-y=f(r)/f(l) (x-y>1)
+    // if x>0, y>0 easy to construct
+// l, x1, x2, ..., x2n+1, r:
+// try x1=2l, x1=floor(l/2), x2n+1=2r, x2n+1=floor(r/2)
+
+#include <bits/stdc++.h>
+using namespace std;
+const int maxn = 2e5+10;
+int n; int a[maxn];
+signed main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    int t = 0;
+    while(t--) {
+        cin >> n;
+        vector<pair<int, int> > v; // value, index
+        for(int i=1; i<=n; i++) { 
+            cin >> a[i]; 
+            if(~a[i]) v.push_back(pair<int, int>(a[i], [i]));
+        }
+        int flg = 0;
+        for(int i=v[0].second-1; i>=1; i--) {
+            if(!flg) a[i] = a[i+1]*2;
+            else a[i] = a[i+1]/2;
+            flg = 1 - flg;
+        }
+        flg = 0;
+        for(int i=v[v.size()-1].second+1; i<=n; i++) {
+            if(!flg) a[i] = a[i-1]*2;
+            else a[i] = a[i-1]/2;
+            flg = 1 - flg;
+        }
+
+        for(int i=0; i<v.size()-1; i++) {
+            int l = v[i].second;
+            int r = v[i+1].second;
+        }
+    }
+    return 0; 
+}
