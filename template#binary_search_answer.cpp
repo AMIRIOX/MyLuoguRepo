@@ -8,7 +8,7 @@ bool check(double x) {}
 // For integer data problems (for precision requirements are not high
 int binaryAnswer(int x, int y) {
   int l=x, r=y;
-  while(l < y) { // use l<y instead of l<=y
+  while(l < y) { // use l<r instead of l<=r
     int mid = l+(r-l)/2;
     if(check(mid)) l=mid+1;  //instead of l=mid
     else r=mid; //instead of r=mid+1
