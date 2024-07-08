@@ -19,6 +19,8 @@
 | `clang 10.0.1`        |                           | `CP Editor`                |
 | `g++ (SUSE Linux) 10+`| `OpenSUSE Tumbleweed`     | `VSCode`                   |
 | `g++ (GCC) 14.1.1+`   | `Arch Linux`           | `Sublime / Neovim / CP Editor`|
+| `g++ (GCC) 14.1.1+`   | `Arch Linux`           | `Neovim`|
+
 部分题目使用了如下的 GCC 编译选项。(很长）
 ```bash
 -Wall -Werror -Wextra -pedantic -Wimplicit-fallthrough -Wsequence-point -Wswitch-default -Wswitch-unreachable -Wswitch-enum -Wstringop-truncation -Wbool-compare -Wtautological-compare -Wfloat-equal -Wshadow=global -Wpointer-arith -Wpointer-compare -Wcast-align -Wcast-qual -Wwrite-strings -Wdangling-else -Wlogical-op -std=c++11
