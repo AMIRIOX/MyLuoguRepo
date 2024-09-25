@@ -1,14 +1,11 @@
 #include <bits/stdc++.h>
+#define int long long
 using namespace std;
 
 void solve() {
     int n = 0, x = 0, y = 0;
     cin >> n >> x >> y;
-    int ard = 0;
-    if(x <= y) {
-        //cout << n / x + ceil((n % x + y % x) * 1.0 / x) << endl;
-        cout << ceil(n * 1.0 / x) << endl;
-    }else cout << ceil(n * 1.0 / y) << endl;
+    cout << (int)ceil(n * 1.0 / min(x, y)) << endl;
 }
 
 signed main() {
