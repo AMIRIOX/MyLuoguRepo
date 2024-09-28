@@ -20,6 +20,7 @@
 | `g++ (SUSE Linux) 10+`| `OpenSUSE Tumbleweed`     | `VSCode`                   |
 | `g++ (GCC) 14.1.1+`   | `Arch Linux`           | `Sublime / Neovim / CP Editor`|
 | `g++ (GCC) 14.1.1+`   | `Arch Linux`           | `Neovim`|
+| `g++.exe (TDM) 4.9.2` | `Windows 11`          | `Sublime`|
 
 部分题目使用了如下的 GCC 编译选项。(很长）
 ```bash
