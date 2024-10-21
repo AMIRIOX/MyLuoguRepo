@@ -5,6 +5,7 @@ luoguorg.sublime-workspace
 
 # executable files and database files(from compiler)
 *.exe
+temp
 *.pdb
 *.ipch
 *.db
