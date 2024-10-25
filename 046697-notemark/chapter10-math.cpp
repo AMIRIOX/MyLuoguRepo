@@ -2,28 +2,28 @@
 #include <cstdio>
 // 1 gcd 返回a,b的最大公约数
 int gcd(int a, int b) {
-	return b ? a : gcd(b, a%b);
+    return b ? a : gcd(b, a%b);
 } // lcm同理可推
 
 // 2 exgcd ax+by=gcd(a,b)
-int gcd(int a, int b, int& x,int& y) {
-	if(!b) {
-		x=1; y=0;
-	}else {
-		gcd(b, a%b, y, x);
-		y -= x*(a/b);
-	}
+int exgcd(int a, int b, int& x, int& y) {
+    if(!b) {
+        x=1; y=0;
+    }else {
+        gcd(b, a%b, y, x);
+        y -= x * (a / b);
+    }
 }
 
 // 3 eratosthenes
 int isp[2000];
 void era(int n) {
-	for(int i=2; i*i<=n; i++) {
-		if(!isp[i])
-		for(int j=i*i; j<=n; j+=i) {
-			isp[j]=1;
-		}
-	}
+    for(int i = 2; i * i <= n; i++) {
+        if(!isp[i])
+        for(int j = i * 2; j <= n; j += i) {
+            isp[j] = 1;
+        }
+    }
 } // 素数定理： pi(x) ~ x/lnx
 
 // 4 ax+by=c的解？
