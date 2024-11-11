@@ -1,58 +1,65 @@
-#include <algorithm>
+// 35ms.
+
 #include <cstdio>
-#include <iostream>
+#include <algorithm>
 using namespace std;
-const int maxm = 2e5 + 10;
-int read() {
-    int val = 0, flg = 1;
-    char ch = getchar();
-    while (ch < '0' || ch > '9') {
-        if (ch == '-')
-            flg = -1;
-        ch = getchar();
-    }
-    while (ch >= '0' && ch <= '9') {
-        val = (val << 3) + (val << 1) + (ch ^ 48);
-        ch = getchar();
-    }
-    return val * flg;
-}
+
+const int maxn = 2e5 + 10;
 struct edge {
     int x, y, v;
-} g[maxm];
-bool cmp(const edge& a, const edge& b) {
-    return a.v < b.v;
+} e[maxn];
+
+int n, m, tot, ans;
+int fa[maxn];
+
+int read() {
+    int flg = 1, val = 0;
+    char ch = (char) getchar_unlocked();
+    while(ch < '0' || ch > '9') {
+        if(ch == '-') flg = 0;
+        ch = (char) getchar_unlocked();
+    }
+    while(ch >= '0' && ch <= '9') {
+        val = (val << 1) + (val << 3) + (ch ^ 48);
+        ch = (char) getchar_unlocked();
+    }
+    return (flg ? val : ~(val - 1));
 }
-int n, m, ans, tot, fa[maxm];
-int find(int x) {
-    while (x != fa[x])
+
+inline int find(int x) {
+    // return x == fa[x] ? x : fa[x] = find(fa[x]);
+    while(__builtin_expect(x != fa[x], 1))
         x = fa[x] = fa[fa[x]];
     return x;
 }
-inline void kruskal() {
-    sort(g + 1, g + m + 1,
-         [&](const edge& a, const edge& b) { return a.v < b.v; });
-    for (register int i = 1; i <= m; ++i) {
-        int uex = find(g[i].x), uey = find(g[i].y);
-        if (uex == uey)
-            continue;
-        ans += g[i].v;
+
+void kruskal() {
+    sort(e + 1, e + m + 1, [&](const edge& a, const edge& b) { return a.v < b.v; });
+    for(int i = 1; i <= m; ++i) {
+        int uex = find(e[i].x), uey = find(e[i].y);
+        if (uex == uey) continue;
+        ans += e[i].v;
         fa[uex] = uey;
-        if (++tot == n - 1)
-            break;
-    }
+        if (++tot == n - 1) break;
+    } 
 }
-int main() {
-    n = read(), m = read();
-    for (register int i = 1; i <= n; ++i) {
-        fa[i] = i;
+
+signed main() {
+    // ios::sync_with_stdio(false);
+    // cin.tie(0);
+    n = read(); m = read();
+    for(int i = 1; i <= n; ++i) fa[i] = i;
+
+    for(int i = 1; i <= m; ++i) {
+        e[i].x = read();
+        e[i].y = read();
+        e[i].v = read();
     }
-    for (register int i = 1; i <= m; ++i) {
-        g[i].x = read();
-        g[i].y = read();
-        g[i].v = read();
-    }
+
     kruskal();
-    printf("%d", ans);
+    if(tot == n - 1) printf("%d\n", ans);
+    else printf("IMP0SSIBLE\n");
+
     return 0;
 }
+
