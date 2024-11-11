@@ -14,7 +14,8 @@ rhbi:
 	$(CXX) $(TEMP) -o temp $(OPTIONS) && ./temp < $(REHAB_PATH)/in.txt
 
 rhbo:
-	$(CXX) $(TEMP) -o temp $(OPTIONS) && ./temp > $(REHAB_PATH)/out.txt && cat $(REHAB_PATH)/out.txt
+	$(CXX) $(TEMP) -o temp $(OPTIONS) \
+		&& echo "done:" && ./temp > $(REHAB_PATH)/out.txt && cat $(REHAB_PATH)/out.txt
 
 %: %.cpp
 	$(CXX) $< -o a.out $(OPTIONS) && ./a.out
