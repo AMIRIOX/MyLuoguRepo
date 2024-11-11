@@ -2,6 +2,7 @@
 #define int long long
 using namespace std;
 
+constexpr int mod = 1e9 + 7;
 int quickpower(int a, int n) {
     if (n == 0)
         return 1;
@@ -15,8 +16,8 @@ int quickpower(int a, int n) {
 int quickpower2(int a, int n) {
     int ans = 1;
     while (n) {
-        if (n & 1) ans *= a;
-        a = a * a;
+        if (n & 1) ans = ans * a % mod;
+        a = a * a % mod;
         n >>= 1;
     }
     return ans;
