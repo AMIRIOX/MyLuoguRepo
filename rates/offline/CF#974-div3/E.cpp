@@ -3,7 +3,8 @@ using namespace std;
 
 #define endl '\n'
 using ll = long long;
-constexpr ll maxn = 4e5 + 10;
+constexpr ll maxn = 5e5 + 10;
+constexpr ll inf = 2e18;
 using answer = vector<vector<ll> >;
 
 inline ll read() {
@@ -35,22 +36,23 @@ void add_edge(ll u, ll v, ll w) {
 }
 
 struct node {
-    ll pos, dis, stat;
-    node(ll _pos, ll _dis, ll _stat = 0): pos(_pos), dis(_dis), stat(_stat) {}
-    bool operator<(const node& b) const { return this->dis > b.dis; }
+    ll pos, dis;
+    bool stat;
+    node(ll _pos, ll _dis, bool _stat = false) : 
+        pos(_pos), dis(_dis), stat(_stat) {}
+    bool operator<(const node& b) const { 
+        return this->dis > b.dis; 
+    }
 };
 
 ll n, m, s, t, h;
-ll hr[maxn], vis[maxn][2];
 
 void init() {
     tot = 0;
     memset(head, -1, sizeof head);
-    memset(hr, 0, sizeof hr);
-    memset(vis, 0, sizeof vis);
 }
 
-void dijkstra(answer& dis) {
+void dijkstra(answer& dis, vector<bool>& hr) {
     priority_queue<node> q;
     q.push(node(s, 0, hr[s]));
     dis[s][hr[s]] = 0;
@@ -58,8 +60,8 @@ void dijkstra(answer& dis) {
         ll u = q.top().pos, statu = q.top().stat; q.pop();
         for(ll i = head[u]; ~i; i = g[i].nxt) {
             ll v = g[i].to, dt = g[i].w;
-            ll statv = max(statu, hr[v]);
-            if(statu) dt /= 2;
+            ll statv = (statu || hr[v]);
+            if(statu) dt >>= 1;
             if(dis[v][statv] > dis[u][statu] + dt) {
                 dis[v][statv] = dis[u][statu] + dt;
                 q.push(node(v, dis[v][statv], statv));
@@ -72,33 +74,36 @@ void dijkstra(answer& dis) {
 void solve() {
     n = read(); m = read(); h = read();
     init();
+
+    vector<bool> hr(n + 1);
     for(ll i = 1; i <= h; ++i) {
         hr[read()] = 1;
     }
+
     ll u, v, w;
     for(ll i = 1; i <= m; ++i) {
         u = read(); v = read(); w = read();
         add_edge(u, v, w);
         add_edge(v, u, w);
     }
-    answer dis1(n + 1, vector<ll>(2, 2e18));
-    answer dis2(n + 1, vector<ll>(2, 2e18));
+    answer dis1(n + 1, vector<ll>(2, inf));
+    answer dis2(n + 1, vector<ll>(2, inf));
 
     s = 1, t = n;
-    dijkstra(dis1);
+    dijkstra(dis1, hr);
 
     s = n, t = 1;
-    dijkstra(dis2);
+    dijkstra(dis2, hr);
 
-    long long ans = 2e18;
+    ll ans = inf;
     for(ll i = 1; i <= n; ++i) {
         ans = min(ans, max(min(dis1[i][0], dis1[i][1]), min(dis2[i][0], dis2[i][1])));
     }
-    cout << (ans == 2e18 ? -1 : ans) << endl;
+    printf("%lld\n", (ans == inf ? -1 : ans));
 }
 
 signed main() {
-    int t = read();
-    while(t--) solve();
+    int T = (int)read();
+    while(T--) solve();
     return 0;
 }
