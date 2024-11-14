@@ -1,7 +1,8 @@
 # To guard this love to the death.
 
 VERSION = -std=c++20
-CXXFLAGS = -g3 -pipe -Wall -D_DEBUG -Wall -Werror -Wextra -pedantic -Wimplicit-fallthrough -Wsequence-point -Wswitch-default -Wswitch-unreachable -Wswitch-enum -Wstringop-truncation -Wbool-compare -Wtautological-compare -Wfloat-equal -Wshadow=global -Wpointer-arith -Wpointer-compare -Wcast-align -Wcast-qual -Wconversion -Wwrite-strings -Wdangling-else -Wlogical-op -finput-charset=utf-8 -fexec-charset=utf-8
+# CXXFLAGS = -g3 -pipe -Wall -D_DEBUG -Wall -Werror -Wextra -pedantic -Wimplicit-fallthrough -Wsequence-point -Wswitch-default -Wswitch-unreachable -Wswitch-enum -Wstringop-truncation -Wbool-compare -Wtautological-compare -Wfloat-equal -Wshadow=global -Wpointer-arith -Wpointer-compare -Wcast-align -Wcast-qual -Wconversion -Wwrite-strings -Wdangling-else -Wlogical-op -finput-charset=utf-8 -fexec-charset=utf-8
+CXXFLAGS = -pipe -Wall -D_DEBUG -Wall -Werror -Wextra -pedantic -Wimplicit-fallthrough -Wsequence-point -Wswitch-default -Wswitch-unreachable -Wswitch-enum -Wstringop-truncation -Wbool-compare -Wtautological-compare -Wfloat-equal -Wshadow=global -Wpointer-arith -Wpointer-compare -Wcast-align -Wcast-qual -Wconversion -Wwrite-strings -Wdangling-else -Wlogical-op -finput-charset=utf-8 -fexec-charset=utf-8
 REHAB_PATH = rehab-241019
 IS_WSL := $(shell grep -i -q "microsoft" /proc/version && echo "true" || echo "false")
 TEMP = $(REHAB_PATH)/temp.cpp
