@@ -8,7 +8,7 @@ bool check(double x) {}
 // 整数二分 求可行答案的最小值
 // [l, mid] [mid + 1, r]
 int binaryAnswer(int l, int r) {
-    while(l < y) { // use l<r instead of l<=r
+    while(l < r) { // use l<r instead of l<=r
         int mid = (l + r) >> 1;
         if(check(mid)) r = mid; 
         else l = mid + 1; 
@@ -18,8 +18,8 @@ int binaryAnswer(int l, int r) {
 
 // 整数二分 求可行答案的最大值
 // [l, mid - 1] [mid, r]
-int binaryAnswer(int r, int r) {
-    while(l < y) { // use l<r instead of l<=r
+int binaryAnswer(int l, int r) {
+    while(l < r) { // use l<r instead of l<=r
         int mid = (l + r + 1) >> 1;
         if(check(mid)) l = mid;  
         else r = mid - 1;  
