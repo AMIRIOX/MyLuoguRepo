@@ -18,14 +18,22 @@
 | `g++ (GCC) 10.2.01`   |                           | `CP Editor`                |
 | `clang 10.0.1`        |                           | `CP Editor`                |
 | `g++ (SUSE Linux) 10+`| `OpenSUSE Tumbleweed`     | `VSCode`                   |
-| `g++ (GCC) 14.1.1+`   | `Arch Linux`           | `Sublime / Neovim / CP Editor`|
-| `g++ (GCC) 14.1.1+`   | `Arch Linux`           | `Neovim`|
-| `g++.exe (TDM) 4.9.2` | `Windows 11`          | `Sublime`|
+| `g++ (GCC) 14.1.1+`   | `Arch Linux`              | `Sublime / Neovim / CP Editor`|
+| `g++ (GCC) 14.1.1+`   | `Arch Linux`              | `Neovim`                   |
+| `g++.exe (TDM) 4.9.2` | `Windows 11`              | `Sublime`                  |
+| `g++ (GCC) 14.2.1`    | `Fedora 40 (WSL)`         | `Neovim`                   |
 
 部分题目使用了如下的 GCC 编译选项。(很长）
 ```bash
 -Wall -Werror -Wextra -pedantic -Wimplicit-fallthrough -Wsequence-point -Wswitch-default -Wswitch-unreachable -Wswitch-enum -Wstringop-truncation -Wbool-compare -Wtautological-compare -Wfloat-equal -Wshadow=global -Wpointer-arith -Wpointer-compare -Wcast-align -Wcast-qual -Wwrite-strings -Wdangling-else -Wlogical-op -std=c++11
 ```
+
+部分题目使用了如下的 GCC 编译选项。
+```makefile
+VERSION = -std=c++20
+CXXFLAGS = -pipe -Wall -D_DEBUG -Wall -Werror -Wextra -pedantic -Wimplicit-fallthrough -Wsequence-point -Wswitch-default -Wswitch-unreachable -Wswitch-enum -Wstringop-truncation -Wbool-compare -Wtautological-compare -Wfloat-equal -Wshadow=global -Wpointer-arith -Wpointer-compare -Wcast-align -Wcast-qual -Wconversion -Wwrite-strings -Wdangling-else -Wlogical-op -finput-charset=utf-8 -fexec-charset=utf-8
+```
+
 部分题目使用较新的 [C++ 17](https://en.cppreference.com/w/cpp/17) 或 [C++ 20](https://en.cppreference.com/w/cpp/20) 标准进行编译和提交。
 
 ## Imperfection
