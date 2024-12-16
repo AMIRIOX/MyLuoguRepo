@@ -1,9 +1,7 @@
-#include <iostream>
-using namespace std;
 // standard binary answer template
 
-bool check(int x) { return }
-bool check(double x) {}
+bool check(int x) { return true; }
+bool check(double x) { return true; }
 
 // 整数二分 求可行答案的最小值
 // [l, mid] [mid + 1, r]
@@ -18,7 +16,7 @@ int binaryAnswer(int l, int r) {
 
 // 整数二分 求可行答案的最大值
 // [l, mid - 1] [mid, r]
-int binaryAnswer(int l, int r) {
+int binaryAnswer2(int l, int r) {
     while(l < r) { // use l<r instead of l<=r
         int mid = (l + r + 1) >> 1;
         if(check(mid)) l = mid;  
