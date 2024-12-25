@@ -3,10 +3,14 @@ using namespace std;
 using ll = long long;
 
 void solve() {
-    ll n;
+    ll n, ans = 1;
     cin >> n;
-    ll k = log2(n)/log2(4);
-    cout << (1 << k) << '\n';
+
+    while(n > 3) {
+        ans <<= 1;
+        n >>= 2;
+    }
+    cout << ans << '\n';
 }
 
 signed main() {

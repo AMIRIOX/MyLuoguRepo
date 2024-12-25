@@ -3,6 +3,7 @@ using namespace std;
 using ll = long long;
 
 const ll fact[] = {1, 1, 2, 6, 24, 120};
+inline ll make(ll a, ll b) { ll res = 0; for(int i = 1; i <= b; i++) res += a * pow(10, i - 1); return res; }
 void solve() {
     ll n, d;
     cin >> n >> d;
@@ -14,11 +15,8 @@ void solve() {
         cout << 5 << ' ';
     if (n >= 6) cout << 7 << ' ';
     else {
-        ll rem = fact[n] % 6;
-        if(rem == 1 && d * 4 % 7 == 0) cout << 7 << ' ';
-        else if(rem == 2 && d * 6 % 7 == 0) cout << 7 << ' ';
-        else if(rem == 3 && d * 5 % 7 == 0) cout << 7 << ' ';
-        else if(rem == 4 && d * 2 % 7 == 0) cout << 7 << ' ';
+        if(n >= 3) cout << 7 << ' ';
+        else if(make(d, fact[n] % 3) % 7 == 0) cout << 7 << ' ';
     }
     ll cnt3 = 0;
     if (n >= 3) cnt3++;
