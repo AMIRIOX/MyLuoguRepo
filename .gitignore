@@ -12,6 +12,7 @@ temp
 
 # data files
 *.txt
+!分析.txt
 *.in
 *.out
 *.ans
