@@ -54,6 +54,7 @@ signed main() {
 }
 */
 
+#ifdef SOL_1
 #include <algorithm>
 #include <bits/stdc++.h>
 using namespace std;
@@ -80,6 +81,45 @@ void solve() {
     for(int i = 0; i < n; i++) {
         ans = max(ans, check(a[i]));
         ans = max(ans, check(b[i]));
+    }
+    cout << ans << '\n';
+}
+
+signed main() {
+    int tt = 1; cin >> tt;
+    while(tt--) solve();
+}
+
+#endif
+
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+
+void solve() {
+    ll n, k;
+    cin >> n >> k;
+    vector<ll> a(n), b(n);
+    for(auto &i : a) cin >> i;
+    for(auto &i : b) cin >> i;
+    
+    vector<pair<ll, int>> events;
+    for(int i = 0; i < n; i++) {
+        events.emplace_back(a[i], 1);
+        events.emplace_back(b[i], 2);
+    }
+    sort(events.begin(), events.end());
+    int cnt = n, bad = 0;
+    ll ans = 0;
+    for(int i = 0; i < 2 * n; ) {
+        auto [price, stat] = events[i];
+        if(bad <= k) ans = max(ans, cnt * price);
+        while(i <= 2 * n && events[i].first == price) {
+            bad += (events[i].second == 1);
+            bad -= (events[i].second == 2);
+            cnt -= (events[i].second == 2);
+            ++i;
+        }
     }
     cout << ans << '\n';
 }
