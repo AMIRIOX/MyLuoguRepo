@@ -3,7 +3,7 @@ using namespace std;
 using ll = long long;
 using pii = pair<int, int>;
 
-int n;
+size_t n;
 vector<ll> pa;
 vector<ll> ppa;
 vector<ll> pppa;
@@ -11,10 +11,10 @@ vector<ll> bss;
 
 vector<ll> cp(vector<ll>& a) {
     vector<ll> ret(a.size() + 1, 0);
-    for(int i = 1; i <= a.size(); i++) {
+    for(size_t i = 1; i <= a.size(); i++) {
         ret[i] = ret[i - 1] + a[i - 1];
     }
-    return std::move(ret);
+    return ret;
 }
 
 inline pii convert(ll i) {
@@ -56,12 +56,11 @@ signed main() {
     ppa = cp(pa);   
 
     pppa = {0};
-    for(int i = 1; i <= n; i++) {
+    for(size_t i = 1; i <= n; i++) {
         int b = i - 1;
         pppa.push_back(pppa.back() + clr(b, 0, n - b - 1));
     }
 
-    int nb = n;
     bss = {0};
     for(ll i = n; i > 1; i--) {
         bss.push_back(bss.back() + i);

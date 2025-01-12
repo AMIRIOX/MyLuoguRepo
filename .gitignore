@@ -13,6 +13,7 @@ temp
 # data files
 *.txt
 !分析.txt
+!compile_flags.txt
 *.in
 *.out
 *.ans

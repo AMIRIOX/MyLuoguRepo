@@ -32,8 +32,10 @@
 部分题目使用了如下的 GCC 编译选项。
 ```makefile
 VERSION = -std=c++20
-CXXFLAGS = -pipe -Wall -D_DEBUG -Wall -Werror -Wextra -pedantic -Wimplicit-fallthrough -Wsequence-point -Wswitch-default -Wswitch-unreachable -Wswitch-enum -Wstringop-truncation -Wbool-compare -Wtautological-compare -Wfloat-equal -Wshadow=global -Wpointer-arith -Wpointer-compare -Wcast-align -Wcast-qual -Wconversion -Wwrite-strings -Wdangling-else -Wlogical-op -finput-charset=utf-8 -fexec-charset=utf-8
+CXXFLAGS = -DDEBUG -pipe -Wall -D_DEBUG -Wall -Werror -Wextra -pedantic -Wimplicit-fallthrough -Wsequence-point -Wswitch-default -Wswitch-unreachable -Wswitch-enum -Wstringop-truncation -Wbool-compare -Wtautological-compare -Wfloat-equal -Wshadow=global -Wpointer-arith -Wpointer-compare -Wcast-align -Wcast-qual -Wconversion -Wwrite-strings -Wdangling-else -Wlogical-op -finput-charset=utf-8 -fexec-charset=utf-8
 ```
+
+~~最后还是关掉了-Wconversion,size_t和int来回转太烦了~~
 
 部分题目使用较新的 [C++ 17](https://en.cppreference.com/w/cpp/17) 或 [C++ 20](https://en.cppreference.com/w/cpp/20) 标准进行编译和提交。
 
