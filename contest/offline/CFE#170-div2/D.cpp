@@ -1,10 +1,83 @@
+#include <bits/stdc++.h>
+using namespace std;
 
+struct lazysum {
+    vector<int> diff;
+    lazysum(int _n) : diff(_n, 0) {}
 
+    void add(int l, int r) {
+        if(l > r) return;
+        diff[l]++;
+        diff[r + 1]--;
+    }
+
+    void push(vector<int> &d) {
+        int sum = 0;
+        for (size_t i = 0; i < diff.size(); i++) {
+            sum += diff[i];
+            diff[i] = 0;
+            if(i < d.size()) d[i] += sum;
+        }
+    }
+};
+
+void solve() {
+    int n = 0, m = 0;
+    cin >> n >> m;
+    vector<int> raw(n + 1, 0);
+    vector<int> S(n + 1, 0);
+    vector<int> dp(m + 1, 0);
+    dp[0] = 0;
+    // dp[i], 0 <= i <= m
+    for (int i = 1; i <= n; i++) {
+        cin >> raw[i];
+        S[i] = S[i - 1] + (raw[i] == 0);
+    }
+    lazysum ls(m + 2);
+    for (int i = 1; i <= n; i++) {
+        if (!raw[i]) {
+            ls.push(dp);
+            for (int I = S[i]; I >= 1; I--) {
+                // the same reason as the 01 backpack
+                dp[I] = max(dp[I - 1], dp[I]);
+            }
+        }
+
+        if (raw[i] > 0) {
+            // [d[raw[i]] ~ d.end()] += 1
+            ls.add(raw[i], S[i]); 
+            // if replace `s[i]` with `m`, dp should be initialized by -inf
+            /*
+            if (i >= raw[i])
+                dp[i] = dp[i] + 1;
+            */
+        }
+        if (raw[i] < 0) {
+            // [d.begin() ~ d[s[i] - abs(raw[i])]] += 1
+            ls.add(0, S[i] - abs(raw[i]));
+            /*
+            if (s[i] - i >= abs(raw[i]))
+                dp[i] = dp[i] + 1;
+            */
+        }
+        //}
+    }
+    ls.push(dp);
+    cout << *max_element(dp.begin(), dp.end()) << '\n';
+}
+
+signed main() {
+    cin.tie(0)->sync_with_stdio(false);
+    int tt = 1; // cin >> tt;
+    while (tt--)
+        solve();
+    return 0;
+}
 
 // !unaccepted wrong thought
 // 既不能二分也不能直接贪心。
 
-#ifdef WRONG_THOUGHT
+#ifdef wrong_thought
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
